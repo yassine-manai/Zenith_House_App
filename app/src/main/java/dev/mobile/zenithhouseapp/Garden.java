@@ -1,6 +1,7 @@
 package dev.mobile.zenithhouseapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,7 +24,8 @@ import dev.mobile.zenithhouseapp.databinding.FragmentGardenBinding;
  * Use the {@link Garden#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Garden extends Fragment {
+public class Garden extends Fragment
+{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,7 +41,8 @@ public class Garden extends Fragment {
     private DatabaseReference mStatusReference;
     private static final String TAG = "Garden";
 
-    public Garden() {
+    public Garden()
+    {
         // Required empty public constructor
     }
 
@@ -52,7 +55,8 @@ public class Garden extends Fragment {
      * @return A new instance of fragment Garden.
      */
     // TODO: Rename and change types and number of parameters
-    public static Garden newInstance(String param1, String param2) {
+    public static Garden newInstance(String param1, String param2)
+    {
         Garden fragment = new Garden();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -62,73 +66,134 @@ public class Garden extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (getArguments() != null)
+        {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         Bind = FragmentGardenBinding.inflate(getLayoutInflater());
         View view = Bind.getRoot();
 
         mDatabase = FirebaseDatabase.getInstance("https://zha-1-430a4-default-rtdb.firebaseio.com");
         mStatusReference = mDatabase.getReference().child("Home");
 
-        Bind.remindergarden.setOnClickListener(new View.OnClickListener() {
+        String reds = "#D3212C";
+        String oranges = "#FF980E";
+        String greens = "#069C56";
+
+        int red = Color.parseColor(reds);
+        int orange = Color.parseColor(oranges);
+        int green = Color.parseColor(greens);
+
+        Bind.remindergarden.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent intent = new Intent(getActivity(), Reminder_Home.class);
                 startActivity(intent);
             }
         });
 
 
-        mStatusReference.child("Temp").addValueEventListener(new ValueEventListener() {
+        mStatusReference.child("Temp").addValueEventListener(new ValueEventListener()
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String temperature = dataSnapshot.getValue(String.class);
-                if (temperature != null) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                float temperature = dataSnapshot.getValue(float.class);
+
                     Bind.TempHome.setText(temperature + " °C");
+
+                if (temperature<30)
+                {
+                    Bind.tempgardencard.setBackgroundColor(green);
                 }
+
+                if (temperature>31)
+                {
+                    Bind.tempgardencard.setBackgroundColor(red);
+                }
+
             }
 
-
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
                 // Handle error
             }
         });
 
-        mStatusReference.child("Humid").addValueEventListener(new ValueEventListener() {
+        mStatusReference.child("Humid").addValueEventListener(new ValueEventListener()
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String Humid = dataSnapshot.getValue(String.class);
-                if (Humid != null) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                int Humid = dataSnapshot.getValue(int.class);
+
                     Bind.humidgarden.setText(Humid + " %");
+
+                if (Humid<20)
+                {
+                    Bind.humdgardencard.setBackgroundColor(green);
                 }
+
+                if ((Humid>20) && (Humid<40))
+                {
+                    Bind.humdgardencard.setBackgroundColor(orange);
+                }
+
+                if (Humid>40)
+                {
+                    Bind.humdgardencard.setBackgroundColor(red);
+                }
+
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
                 // Handle error
             }
         });
 
-        mStatusReference.child("Hsol").addValueEventListener(new ValueEventListener() {
+        mStatusReference.child("Hsol").addValueEventListener(new ValueEventListener()
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String Humid = dataSnapshot.getValue(String.class);
-                if (Humid != null) {
-                    Bind.TempGarden.setText(Humid + " %");
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                int Humidsol = dataSnapshot.getValue(int.class);
+
+                    Bind.TempGarden.setText(Humidsol + " %");
+
+                if (Humidsol<20)
+                {
+                    Bind.humsolcard.setBackgroundColor(green);
                 }
+
+                if ((Humidsol>20) && (Humidsol<40))
+                {
+                    Bind.humsolcard.setBackgroundColor(orange);
+                }
+
+                if (Humidsol>40)
+                {
+                    Bind.humsolcard.setBackgroundColor(red);
+                }
+
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
                 // Handle error
             }
         });

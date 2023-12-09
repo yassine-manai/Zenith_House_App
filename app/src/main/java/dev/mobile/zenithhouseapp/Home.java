@@ -1,6 +1,7 @@
 package dev.mobile.zenithhouseapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -93,6 +94,15 @@ public class Home extends Fragment
         mStatR2 = mDatabase.getReference().child("Room2");
         mStatR3 = mDatabase.getReference().child("Room3");
 
+        String reds = "#D3212C";
+        String oranges = "#FF980E";
+        String greens = "#069C56";
+
+        int red = Color.parseColor(reds);
+        int orange = Color.parseColor(oranges);
+        int green = Color.parseColor(greens);
+
+
         Binding.reminder.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -109,12 +119,21 @@ public class Home extends Fragment
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                String temperature = dataSnapshot.getValue(String.class);
-                if (temperature != null) {
-                    Binding.TempHome.setText(temperature + " °C");
-                }
-            }
+                float temperature = dataSnapshot.getValue(float.class);
 
+                    Binding.TempHome.setText(temperature + " °C");
+
+                    if (temperature<30)
+                    {
+                        Binding.cardtemp.setBackgroundColor(green);
+                    }
+
+                    if (temperature>31)
+                    {
+                        Binding.cardtemp.setBackgroundColor(red);
+                    }
+
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
@@ -129,10 +148,81 @@ public class Home extends Fragment
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                String Humid = dataSnapshot.getValue(String.class);
-                if (Humid != null)
-                {
+                int Humid = dataSnapshot.getValue(int.class);
+
                     Binding.HumidHome.setText(Humid + " %");
+
+                if (Humid<20)
+                {
+                    Binding.cardhumid.setBackgroundColor(green);
+                }
+
+                if ((Humid>20) && (Humid<40))
+                {
+                    Binding.cardhumid.setBackgroundColor(orange);
+                }
+
+                if (Humid>40)
+                {
+                    Binding.cardhumid.setBackgroundColor(red);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
+                // Handle error
+            }
+        });
+
+        mStatHome.child("wifi").addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                String wifi = dataSnapshot.getValue(String.class);
+                if (wifi != null)
+                {
+                    if (wifi.equals("ON"))
+                    {
+                        Binding.wifi.setText("Wifi Connecté");
+                        Binding.wifiimg.setImageResource(R.drawable.wifion);
+
+                    }
+                    if (wifi.equals("OFF"))
+                    {
+                        Binding.wifi.setText("Wifi Non Connecté ");
+                        Binding.wifiimg.setImageResource(R.drawable.wifioff);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
+                // Handle error
+            }
+        });
+
+        mStatHome.child("FB").addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                String firebase = dataSnapshot.getValue(String.class);
+                if (firebase != null)
+                {
+                    if (firebase.equals("ON"))
+                    {
+                        Binding.firebase.setText("Firebase Connecté");
+                        Binding.firebaseimg.setImageResource(R.drawable.serverconenct);
+
+                    }
+                    if (firebase.equals("OFF"))
+                    {
+                        Binding.firebase.setText("Firebase Non Connecté ");
+                        Binding.firebaseimg.setImageResource(R.drawable.servererror);
+                    }
                 }
             }
 
@@ -145,84 +235,58 @@ public class Home extends Fragment
 
 
 
+        setSwitchChangeListener(Binding.switch1, Binding.switchImage1, "Led", mStatR1);
+        setSwitchChangeListenerac(Binding.acr1Switch, Binding.acr1, "AC", mStatR1);
 
+        setSwitchChangeListener(Binding.switch2, Binding.switchImage2, "Led", mStatR2);
+        setSwitchChangeListenerac(Binding.acr2Switch, Binding.acr2, "AC", mStatR2);
 
+        setSwitchChangeListener(Binding.switch3, Binding.switchImage3, "Led", mStatR3);
+        setSwitchChangeListenerac(Binding.acr3Switch, Binding.acr3, "AC", mStatR3);
 
         return view;
     }
 
-
-    private void setSwitchChangeListener(final Switch switchView, final ImageView switchImageView, final String switchName)
+    private void setSwitchChangeListener(final Switch switchView, final ImageView switchImageView, final String switchName, final DatabaseReference roomReference)
     {
         switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
-                updateFirebaseR1(switchName, isChecked);
+                updateFirebase(roomReference, switchName, isChecked);
                 updateSwitchUI(switchView, switchImageView, isChecked);
             }
         });
     }
 
-
-    private void setSwitchChangeListenerac(final Switch switchView, final ImageView switchImageView, final String switchName)
+    private void setSwitchChangeListenerac(final Switch switchView, final ImageView switchImageView, final String switchName, final DatabaseReference roomReference)
     {
         switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
-                updateFirebaseac1(switchName, isChecked);
+                updateFirebase(roomReference, switchName, isChecked);
                 updateSwitchac(switchView, switchImageView, isChecked);
             }
         });
     }
 
-    private void updateFirebaseR1(String switchName, boolean isChecked)
+    private void updateFirebase(DatabaseReference roomReference, String switchName, boolean isChecked)
     {
-        mStatR1.child(switchName).setValue(isChecked ? "ON" : "OFF");
-    }
-
-    private void updateFirebaseR2(String switchName, boolean isChecked)
-    {
-        mStatR2.child(switchName).setValue(isChecked ? "ON" : "OFF");
-    }
-
-    private void updateFirebaseR3(String switchName, boolean isChecked)
-    {
-        mStatR3.child(switchName).setValue(isChecked ? "ON" : "OFF");
-    }
-
-    private void updateFirebaseac1(String switchName, boolean isChecked)
-    {
-        mStatR1.child(switchName).setValue(isChecked ? "ON" : "OFF");
-    }
-
-    private void updateFirebaseac2(String switchName, boolean isChecked)
-    {
-        mStatR1.child(switchName).setValue(isChecked ? "ON" : "OFF");
-    }
-
-    private void updateFirebaseac3(String switchName, boolean isChecked)
-    {
-        mStatR1.child(switchName).setValue(isChecked ? "ON" : "OFF");
+        roomReference.child(switchName).setValue(isChecked ? "ON" : "OFF");
     }
 
     private void updateSwitchUI(Switch switchView, ImageView switchImageView, boolean isChecked)
     {
         if (isChecked)
         {
-            // Switch is checked (ON)
-            switchView.getThumbDrawable().setTint(getResources().getColor(R.color.primaryColor));
-            switchView.getTrackDrawable().setTint(getResources().getColor(R.color.primaryColor));
             switchView.setText("Light ON");
             switchImageView.setImageResource(R.drawable.bulb);
         }
         else
         {
-            switchView.getThumbDrawable().setTint(getResources().getColor(R.color.white));
-            switchView.getTrackDrawable().setTint(getResources().getColor(R.color.white));
             switchView.setText("Light OFF");
             switchImageView.setImageResource(R.drawable.lightbulb);
         }
@@ -232,19 +296,13 @@ public class Home extends Fragment
     {
         if (isChecked)
         {
-            // Switch is checked (ON)
-            switchView.getThumbDrawable().setTint(getResources().getColor(R.color.primaryColor));
-            switchView.getTrackDrawable().setTint(getResources().getColor(R.color.primaryColor));
-            switchView.setText("AC ON");
-            switchImageView.setImageResource(R.drawable.ac);
+            switchView.setText("Climatisseur Activée");
+            switchImageView.setImageResource(R.drawable.climon);
         }
         else
         {
-            switchView.getThumbDrawable().setTint(getResources().getColor(R.color.white));
-            switchView.getTrackDrawable().setTint(getResources().getColor(R.color.white));
-            switchView.setText("AC OFF");
-            switchImageView.setImageResource(R.drawable.ac);
+            switchView.setText("Climatisseur Désactivée");
+            switchImageView.setImageResource(R.drawable.climoff);
         }
     }
-
 }

@@ -109,7 +109,7 @@
                     android:checked="false"
                     android:clickable="true"
                     android:padding="10dp"
-                    android:text=" Gate Open "
+                    android:text=" Garage Closed "
                     android:textColor="@color/primaryColor"
                     android:textSize="20sp"
                     android:textStyle="bold"

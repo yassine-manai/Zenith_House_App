@@ -53,6 +53,7 @@
                     android:layout_width="380dp"
                     android:layout_height="match_parent"
                     android:layout_margin="20dp"
+                    android:id="@+id/cardtemp"
                     android:background="@drawable/lightcont"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="10dp">
@@ -109,6 +110,7 @@
                     android:layout_width="380dp"
                     android:layout_height="match_parent"
                     android:layout_margin="20dp"
+                    android:id="@+id/cardhumid"
                     android:background="@drawable/lightcont"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="10dp">
@@ -252,10 +254,12 @@
                             android:id="@+id/acr1"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
+                            android:layout_marginLeft="15dp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:src="@drawable/ac" />
+                            android:visibility="visible"
+                            android:src="@drawable/climoff" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -276,13 +280,13 @@
                             <Switch
                                 android:id="@+id/acr1_switch"
                                 android:layout_width="match_parent"
-                                android:layout_height="50dp"
+                                android:layout_height="100dp"
                                 android:checked="false"
                                 android:clickable="true"
                                 android:padding="10dp"
                                 android:textColor="@color/primaryColor"
                                 android:textStyle="bold"
-                                android:text=" Climatisseur OFF " />
+                                android:text=" Climatisseur Désactiver "/>
 
                         </LinearLayout>
                     </LinearLayout>
@@ -343,7 +347,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_toEndOf="@id/switchImage2"
-                            android:text="Room 1 "
+                            android:text="Room 2 "
                             android:textColor="@color/white"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -381,10 +385,11 @@
                             android:id="@+id/acr2"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
+                            android:layout_marginLeft="15dp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:src="@drawable/ac" />
+                            android:src="@drawable/climoff" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -405,13 +410,13 @@
                             <Switch
                                 android:id="@+id/acr2_switch"
                                 android:layout_width="match_parent"
-                                android:layout_height="50dp"
+                                android:layout_height="100dp"
                                 android:checked="false"
                                 android:clickable="true"
                                 android:padding="10dp"
                                 android:textColor="@color/primaryColor"
                                 android:textStyle="bold"
-                                android:text=" Climatisseur OFF "
+                                android:text=" Climatisseur Désactiver "
 
                                 />
 
@@ -464,10 +469,11 @@
                             android:id="@+id/wifiimg"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
+                            android:layout_marginLeft="15dp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:src="@drawable/wifi" />
+                            android:src="@drawable/wifioff" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -488,7 +494,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="Connected"
+                                android:text="No Connecté"
                                 android:id="@+id/wifi"
                                 android:gravity="center"
                                 android:layout_gravity="center"
@@ -521,7 +527,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:src="@drawable/bd" />
+                            android:src="@drawable/servererror" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -646,10 +652,11 @@
                             android:id="@+id/acr3"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
+                            android:layout_marginLeft="15dp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:src="@drawable/ac" />
+                            android:src="@drawable/climoff" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -670,13 +677,13 @@
                             <Switch
                                 android:id="@+id/acr3_switch"
                                 android:layout_width="match_parent"
-                                android:layout_height="50dp"
+                                android:layout_height="100dp"
                                 android:checked="false"
                                 android:clickable="true"
                                 android:padding="10dp"
                                 android:textColor="@color/primaryColor"
                                 android:textStyle="bold"
-                                android:text=" Climatisseur OFF "
+                                android:text=" Climatisseur Désactiver "
 
                                 />
 
