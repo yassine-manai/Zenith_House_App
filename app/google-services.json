@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "94717730477",
+    "firebase_url": "https://zha-1-430a4-default-rtdb.firebaseio.com",
+    "project_id": "zha-1-430a4",
+    "storage_bucket": "zha-1-430a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94717730477:android:70bb479adef453a938b024",
+        "android_client_info": {
+          "package_name": "dev.mobile.zenithhouseapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94717730477-65ac7291ukie493oaaier1nei4ggj4ji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIqBFboPucTJ3Cg-YFVfLmOJj6MBI7uNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94717730477-65ac7291ukie493oaaier1nei4ggj4ji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

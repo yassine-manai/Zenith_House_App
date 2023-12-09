@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    tools:context=".Garage">
+
+    <!-- parking -->
+    <TextView
+        android:id="@+id/txtpark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="42dp"
+        android:fontFamily="sans-serif"
+        android:text=" Parking "
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/reminderpark"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/edit" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:layout_below="@id/reminderpark"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:id="@+id/carImage"
+        android:src="@drawable/sedan"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/carImage"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/lightcont"
+        android:textColor="@color/black"
+        android:id="@+id/Gate"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:text="Statut : Garage Plein"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="380dp"
+        android:layout_height="130dp"
+        android:layout_below="@id/Gate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/lightcont"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/garageOpen"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:src="@drawable/go" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text=" Gate "
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <Switch
+                    android:id="@+id/park_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:checked="false"
+                    android:clickable="true"
+                    android:padding="10dp"
+                    android:text=" Gate Open "
+                    android:textColor="@color/primaryColor"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
