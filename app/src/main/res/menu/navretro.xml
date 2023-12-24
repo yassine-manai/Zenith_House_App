@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/addfrag"
+        android:icon="@drawable/add_24"
+        android:title="@string/add_user" />
+    <item
+        android:id="@+id/list"
+        android:icon="@drawable/list_24"
+        android:title="@string/list_user" />
+    <item
+        android:id="@+id/update"
+        android:icon="@drawable/mode_24"
+        android:title="@string/update_user" />
+    <item
+        android:id="@+id/delete"
+        android:icon="@drawable/delete_24"
+        android:title="@string/del_user" />
+
+</menu>

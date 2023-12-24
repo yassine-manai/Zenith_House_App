@@ -113,6 +113,16 @@ public class Home extends Fragment
             }
         });
 
+        Binding.feed.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getActivity(), feed.class);
+                startActivity(intent);
+            }
+        });
+
         //Température
         mStatHome.child("Temp").addValueEventListener(new ValueEventListener()
         {
@@ -232,8 +242,6 @@ public class Home extends Fragment
                 // Handle error
             }
         });
-
-
 
         setSwitchChangeListener(Binding.switch1, Binding.switchImage1, "Led", mStatR1);
         setSwitchChangeListenerac(Binding.acr1Switch, Binding.acr1, "AC", mStatR1);
