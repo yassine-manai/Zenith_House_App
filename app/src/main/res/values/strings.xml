@@ -9,5 +9,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_main">Main</string>
+    <string name="add_user">ADD</string>
+    <string name="update_user">UPDATE</string>
+    <string name="list_user">LIST</string>
+    <string name="del_user">DELETE</string>
+
 
 </resources>
