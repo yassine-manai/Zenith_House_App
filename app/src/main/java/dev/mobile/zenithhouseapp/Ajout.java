@@ -104,6 +104,11 @@ public class Ajout extends Fragment {
                     Toast.makeText(getActivity().getApplication(), "Probléme d'ajout", Toast.LENGTH_LONG).show();
 
                 }
+
+                if(rslt === 1)
+                {
+                    return -1;
+                }
             }
 
         });
