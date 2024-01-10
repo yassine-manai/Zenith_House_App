@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
+    android:gravity="center"
     android:background="#c79595"
     android:layout_height="match_parent">
 
@@ -24,7 +24,6 @@
         android:layout_width="250dp"
         android:layout_height="45dp"
         android:layout_below="@+id/txt"
-        android:layout_margin="10dp"
         android:background="@drawable/input"
         android:gravity="center"
         android:hint="Feed ID"
@@ -84,12 +83,5 @@
         android:layout_below="@id/et_updated_email"
         android:text="Update Feed" />
 
-    <TextView
-        android:id="@+id/update_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnUpdateUser"
-        android:textColor="#FF0000"
-        android:layout_marginTop="8dp"
-        android:visibility="gone" />
+
 </RelativeLayout>

@@ -3,6 +3,8 @@ package dev.mobile.zenithhouseapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -12,67 +14,69 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 
 public class feed extends AppCompatActivity {
-    BottomNavigationView btm;
+    private BottomNavigationView bottomNavigationView;
 
     @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_feed);
 
-        btm = findViewById(R.id.btnavretro);
-        btm.setOnNavigationItemSelectedListener(navigListener);
+        bottomNavigationView = findViewById(R.id.btnavretro);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navigListener);
+
+        // Load the default fragment
+        loadFragment(new AddFeed());
     }
 
     private OnNavigationItemSelectedListener navigListener =
-            new OnNavigationItemSelectedListener()
-            {
+            new OnNavigationItemSelectedListener() {
+                @SuppressLint("NonConstantResourceId")
                 @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item)
-                {
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragment = null;
 
-                    if (item.getItemId() == R.id.addfrag)
+                    if (item.getItemId() == R.id.addfeed)
                     {
                         selectedFragment = new AddFeed();
                     }
 
-
-                    if (item.getItemId() == R.id.list)
+                    if (item.getItemId() == R.id.listfeed)
                     {
                         selectedFragment = new ListerFragment();
                     }
 
-
-                    if (item.getItemId() == R.id.update)
+                    if (item.getItemId() == R.id.updatefeed)
                     {
                         selectedFragment = new UpdateFeed();
                     }
 
-                    if (item.getItemId() == R.id.delete)
+                    if (item.getItemId() == R.id.deletefeed)
                     {
                         selectedFragment = new DeleteFeed();
                     }
 
-
-
-
-                    if (selectedFragment != null)
-                    {
-                        String URL="http://172.16.12.153:80";
+                    if (selectedFragment != null) {
+                        // Pass data to the fragment using a bundle
                         Bundle bundle = new Bundle();
-
-                        bundle.putString("url", URL);
-
+                        bundle.putString("url", "https://196.203.63.40:80");
                         selectedFragment.setArguments(bundle);
 
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.navretroadd, selectedFragment)
-                                .commit();
+                        // Load the selected fragment
+                        loadFragment(selectedFragment);
+                        return true;
                     }
 
-                    return true;
+                    return false;
                 }
             };
+
+    private void loadFragment(Fragment fragment) {
+        // Replace the current fragment with the selected one
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.navretroadd, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }

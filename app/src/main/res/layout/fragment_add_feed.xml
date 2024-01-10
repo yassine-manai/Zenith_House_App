@@ -23,6 +23,18 @@
         android:layout_marginBottom="20dp" />
 
     <EditText
+        android:id="@+id/et_id_add"
+        android:hint=" Feed ID "
+        android:layout_width="250dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:background="@drawable/input"
+        android:layout_height="45dp"/>
+
+    <EditText
         android:id="@+id/et_nom_add"
         android:hint="Nom"
         android:layout_width="250dp"
@@ -33,6 +45,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/input"
         android:layout_height="45dp"/>
+
     <EditText
         android:id="@+id/et_username_add"
         android:hint="N° du Téléphone"
@@ -48,7 +61,6 @@
     <EditText
         android:id="@+id/et_password_add"
         android:hint="Avis"
-        android:inputType="textPassword"
         android:layout_width="250dp"
         android:textColor="@color/black"
         android:textStyle="bold"

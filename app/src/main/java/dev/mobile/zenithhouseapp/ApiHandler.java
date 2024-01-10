@@ -10,22 +10,23 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 public interface ApiHandler
 {
-    @GET("webservice/list.php")
+    @GET("ZHA/list.php")
     Call<List<feeds>> getAllfeeds();
 
     @FormUrlEncoded
-    @POST("webservice/insert.php")
-    Call<feeds> insertfeeds(@Field("name") String name,
-                          @Field("number") String number,
-                          @Field("feed") String feed);
+    @POST("ZHA/insert.php")
+    Call<feeds> insertfeeds(
+                            @Field("name") String name,
+                            @Field("number") String number,
+                            @Field("feed") String feed);
 
     @FormUrlEncoded
-    @POST("webservice/update.php")
+    @POST("ZHA/update.php")
     Call<feeds> updatetfeeds(@Field("id") int id,
                              @Field("name") String name,
                              @Field("number") String number,
                              @Field("feed") String feed);
     @FormUrlEncoded
-    @POST("webservice/delete.php")
+    @POST("ZHA/delete.php")
     Call<Void> deletefeeds(@Field("id") int id);
 }

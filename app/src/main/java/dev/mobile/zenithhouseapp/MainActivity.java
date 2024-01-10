@@ -3,7 +3,10 @@ package dev.mobile.zenithhouseapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -21,6 +24,8 @@ public class MainActivity extends AppCompatActivity
 
         bottomNavigationView = findViewById(R.id.bt_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigListener);
+
+        loadFragment(new Home());
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigListener =
@@ -47,21 +52,28 @@ public class MainActivity extends AppCompatActivity
                     }
 
 
-                    if (selectedFragment != null)
-                    {
-                        String URL="http://172.16.13.122:80/";
+                    if (selectedFragment != null) {
+                        // Pass data to the fragment using a bundle
                         Bundle bundle = new Bundle();
-
-                        bundle.putString("url", URL);
-
+                        bundle.putString("url", "http://192.168.1.50:80");
                         selectedFragment.setArguments(bundle);
 
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.addplaceholer, selectedFragment)
-                                .commit();
+                        // Load the selected fragment
+                        loadFragment(selectedFragment);
+                        return true;
                     }
 
-                    return true;
+                    return false;
                 }
             };
+
+
+private void loadFragment(Fragment fragment) {
+        // Replace the current fragment with the selected one
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.addplaceholer, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        }
 }

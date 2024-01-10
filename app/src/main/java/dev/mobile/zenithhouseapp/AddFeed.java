@@ -32,7 +32,7 @@ public class AddFeed extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private EditText nom_add,phn_add,suggest_add;
+    private EditText idf,nom_add,phn_add,suggest_add;
     private Button BtnAdd;
     private TextView err;
 
@@ -117,13 +117,12 @@ public class AddFeed extends Fragment {
                 {
                     Toast.makeText(getActivity(),"Fedds added", Toast.LENGTH_LONG).show();
                 }
-
             }
 
             @Override
             public void onFailure (Throwable t)
             {
-                Toast.makeText(getActivity(), "failed" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Failed" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 err.setText(t.getLocalizedMessage());
             }
         });

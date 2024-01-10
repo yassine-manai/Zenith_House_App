@@ -104,8 +104,9 @@ public class ListerFragment extends Fragment {
 
                     FeedAdapter userAdapter = new FeedAdapter(getActivity(), listfeeds);
                     recyclerViewUser.setAdapter(userAdapter);
-
                     recyclerViewUser.setLayoutManager(layoutManager);
+
+
 
                     // Set up RecyclerView
 

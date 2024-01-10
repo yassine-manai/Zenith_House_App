@@ -79,7 +79,6 @@ public class UpdateFeed extends Fragment {
         phone = v.findViewById(R.id.et_updated_username);
         feed = v.findViewById(R.id.et_updated_email);
         btnUpdate = v.findViewById(R.id.btnUpdateUser);
-        updateError = v.findViewById(R.id.update_error);
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
