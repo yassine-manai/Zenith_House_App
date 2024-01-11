@@ -1,11 +1,7 @@
 package dev.mobile.zenithhouseapp;
 
-import static java.lang.System.err;
-
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,29 +10,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
+import java.io.IOException;
+
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddFeed#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AddFeed extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private EditText idf,nom_add,phn_add,suggest_add;
+    private EditText idf, nom_add, phn_add, suggest_add;
     private Button BtnAdd;
     private TextView err;
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -44,15 +36,6 @@ public class AddFeed extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AddFeed.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AddFeed newInstance(String param1, String param2) {
         AddFeed fragment = new AddFeed();
         Bundle args = new Bundle();
@@ -74,21 +57,18 @@ public class AddFeed extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         View v = inflater.inflate(R.layout.fragment_add_feed, container, false);
 
-        nom_add=v.findViewById(R.id.et_nom_add);
-        phn_add= v.findViewById(R.id.et_username_add);
-        suggest_add=v.findViewById(R.id.et_password_add);
-        BtnAdd=v.findViewById(R.id.btnAddUser);
-        err=v.findViewById(R.id.error);
+        idf = v.findViewById(R.id.et_id_add);
+        nom_add = v.findViewById(R.id.et_nom_add);
+        phn_add = v.findViewById(R.id.et_username_add);
+        suggest_add = v.findViewById(R.id.et_password_add);
+        BtnAdd = v.findViewById(R.id.btnAddUser);
+        err = v.findViewById(R.id.error);
 
-        BtnAdd.setOnClickListener(new View.OnClickListener()
-        {
+        BtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 addFeed();
             }
         });
@@ -96,36 +76,64 @@ public class AddFeed extends Fragment {
         return v;
     }
 
-    private void addFeed()
-    {
+    private void addFeed() {
+        String idStr = idf.getText().toString().trim();
         String name = nom_add.getText().toString().trim();
         String number = phn_add.getText().toString().trim();
-        String feed =suggest_add.getText().toString().trim();
+        String feed = suggest_add.getText().toString().trim();
 
-        String URL= getArguments().getString("url", "");
-        Retrofit Rf = new Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create()).build();
+        // Check for empty fields
+        if (TextUtils.isEmpty(idStr) || TextUtils.isEmpty(name) || TextUtils.isEmpty(number) || TextUtils.isEmpty(feed)) {
+            Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        ApiHandler api = Rf.create(ApiHandler.class);
-        Call<feeds> addfeed = api.insertfeeds(name, number, feed);
+        int id = Integer.parseInt(idStr);
 
-        addfeed.enqueue(new Callback<feeds>()
-        {
+        // Retrieve URL from arguments
+        String URL = getArguments().getString("url", "");
+
+        // Create a Retrofit instance
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        // Create an instance of the ApiHandler interface
+        ApiHandler api = retrofit.create(ApiHandler.class);
+
+        // Create an instance of FeedRequestBody
+        FeedRequestBody requestBody = new FeedRequestBody(id, name, number, feed);
+
+        // Make the API call
+        Call<feeds> addfeed = api.insertfeeds(requestBody);
+
+        addfeed.enqueue(new Callback<feeds>() {
             @Override
-            public void onResponse (Response<feeds> response, Retrofit retrofit)
-            {
-                if (response.isSuccess())
-                {
-                    Toast.makeText(getActivity(),"Fedds added", Toast.LENGTH_LONG).show();
+            public void onResponse(Response<feeds> response, Retrofit retrofit) {
+                if (response.isSuccess()) {
+                    // HTTP status code is in the range [200, 300)
+                    if (response.body() != null) {
+                        Toast.makeText(getActivity(), "Feeds added", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    // HTTP status code is outside the range [200, 300)
+                    try {
+                        String errorBody = response.errorBody().string();
+                        Toast.makeText(getActivity(), "Failed: " + errorBody, Toast.LENGTH_LONG).show();
+                        err.setText(errorBody); // Update the error text view
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
+
             @Override
-            public void onFailure (Throwable t)
-            {
-                Toast.makeText(getActivity(), "Failed" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            public void onFailure(Throwable t) {
+                Toast.makeText(getActivity(), "Failed: " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 err.setText(t.getLocalizedMessage());
             }
         });
     }
-
 }

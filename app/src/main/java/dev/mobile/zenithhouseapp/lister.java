@@ -28,9 +28,9 @@ public class lister extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private List<Contact> contactList;
+    private List<note> noteList;
     private RecyclerView.LayoutManager layoutManager;
-    private ContactAdapter contactAdapter;
+    private noteAdapter nAdapter;
 
     public lister() {
         // Required empty public constructor
@@ -70,13 +70,13 @@ public class lister extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.contact_recyclerview);
 
         layoutManager = new LinearLayoutManager(getActivity());
-        ContactBDD db = new ContactBDD(getActivity());
-        contactList = db.getAllContacts(); // Retrieve the contact list from the database
+        noteBDD db = new noteBDD(getActivity());
+        noteList = db.getAllnotes(); // Retrieve the contact list from the database
 
-        contactAdapter = new ContactAdapter(getActivity(), contactList);
+        nAdapter = new noteAdapter(getActivity(), noteList);
 
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(contactAdapter);
+        recyclerView.setAdapter(nAdapter);
 
         return view;
     }

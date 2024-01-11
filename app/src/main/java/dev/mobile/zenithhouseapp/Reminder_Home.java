@@ -50,7 +50,7 @@ public class Reminder_Home extends AppCompatActivity implements View.OnClickList
     private void loadFragment(Fragment fragment)
     {
         Bundle bundle = new Bundle();
-        ContactBDD db = new ContactBDD(Reminder_Home.this);
+        noteBDD db = new noteBDD(Reminder_Home.this);
         bundle.putSerializable("Clé", db);
         fragment.setArguments(bundle);
 

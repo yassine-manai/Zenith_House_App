@@ -1,9 +1,6 @@
 package dev.mobile.zenithhouseapp;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -25,12 +24,9 @@ import retrofit.Retrofit;
  */
 public class DeleteFeed extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -42,15 +38,6 @@ public class DeleteFeed extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DeleteFeed.
-     */
-    // TODO: Rename and change types and number of parameters
     public static DeleteFeed newInstance(String param1, String param2) {
         DeleteFeed fragment = new DeleteFeed();
         Bundle args = new Bundle();
@@ -102,7 +89,9 @@ public class DeleteFeed extends Fragment {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create()).build();
 
         ApiHandler api = retrofit.create(ApiHandler.class);
-        Call<Void> deleteUserCall = api.deletefeeds(Integer.parseInt(id));
+        FeedIdRequestBody requestBody = new FeedIdRequestBody(Integer.parseInt(id));
+
+        Call<Void> deleteUserCall = api.deletefeeds(requestBody);
 
         deleteUserCall.enqueue(new Callback<Void>() {
             @Override
@@ -120,7 +109,6 @@ public class DeleteFeed extends Fragment {
                 Toast.makeText(getActivity(), "Delete failed: " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 deleteError.setText(t.getLocalizedMessage());
             }
-
         });
     }
 }

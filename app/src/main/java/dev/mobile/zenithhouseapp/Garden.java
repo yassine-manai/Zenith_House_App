@@ -82,7 +82,7 @@ public class Garden extends Fragment
         Bind = FragmentGardenBinding.inflate(getLayoutInflater());
         View view = Bind.getRoot();
 
-        mDatabase = FirebaseDatabase.getInstance("https://zha-1-430a4-default-rtdb.firebaseio.com");
+        mDatabase = FirebaseDatabase.getInstance("https://zha2-cb6f9-default-rtdb.firebaseio.com/");
         mStatusReference = mDatabase.getReference().child("Home");
 
         String reds = "#D3212C";

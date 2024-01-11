@@ -1,18 +1,18 @@
 package dev.mobile.zenithhouseapp;
 
 
-public class Contact
+public class note
 {
     private int id;
-    private String nom,number;
+    private String nom,text;
 
-    public Contact()
+    public note()
     {
     }
 
-    public Contact(String nom, String number)
+    public note(String nom, String text)
     {
-        this.nom=nom; this.number=number;
+        this.nom=nom; this.text=text;
     }
 
     public String getNom()
@@ -25,9 +25,9 @@ public class Contact
         return id;
     }
 
-    public String getNumber()
+    public String getText()
     {
-        return number;
+        return text;
     }
 
     public void setId(int id)
@@ -40,14 +40,14 @@ public class Contact
         this.nom = nom;
     }
 
-    public void setNumber(String number)
+    public void setText(String text)
     {
-        this.number = number;
+        this.text = text;
     }
 
     @Override
     public String toString()
     {
-        return "Contact{" + "id=" + id + ", nom='" + nom + '\'' + ", number='" + number + '\'' + '}';
+        return "note{" + "id=" + id + ", nom='" + nom + '\'' + ", text ='" + text + '\'' + '}';
     }
 }

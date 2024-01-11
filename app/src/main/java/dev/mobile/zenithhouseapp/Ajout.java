@@ -20,7 +20,7 @@ public class Ajout extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    EditText editNom,editNum;
+    EditText editNom,editTxt;
     Button Ajouter;
 
     private static final String ARG_PARAM1 = "param1";
@@ -67,7 +67,7 @@ public class Ajout extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_ajout, container, false);
         editNom = v.findViewById(R.id.editNomFrag);
-        editNum = v.findViewById(R.id.editNumFrag);
+        editTxt = v.findViewById(R.id.editText);
         Ajouter = v.findViewById(R.id.btnFragAjouter);
 
         Ajouter.setOnClickListener(new View.OnClickListener()
@@ -82,18 +82,18 @@ public class Ajout extends Fragment {
                     return;
                 }
 
-                if (editNum.getText().toString().equals(""))
+                if (editTxt.getText().toString().equals(""))
                 {
-                    editNum.setError("Invalide numéro !");
-                    editNum.requestFocus();
+                    editTxt.setError("Invalide Text !");
+                    editTxt.requestFocus();
                     return;
                 }
 
 
-                ContactBDD bd = (ContactBDD) getArguments().getSerializable("Clé");
-                Contact C = new Contact(editNom.getText().toString(), editNum.getText().toString());
+                noteBDD bd = (noteBDD) getArguments().getSerializable("Clé");
+                note nt = new note(editNom.getText().toString(), editTxt.getText().toString());
 
-                long rslt = bd.addContact(C);
+                long rslt = bd.addnotes(nt);
 
                 if (rslt != -1)
                 {
@@ -105,10 +105,6 @@ public class Ajout extends Fragment {
 
                 }
 
-                if(rslt === 1)
-                {
-                    return -1;
-                }
             }
 
         });

@@ -11,7 +11,7 @@ public class DataBaseHandler extends SQLiteOpenHelper
 {
     public static final int DATABASE_VERSION=1;
 
-    public static final String DATABASE_NAME="DBContactFavoris",TABLE_NAME="contact",KEY_ID="id",KEY_NAME="nom",KEY_NUMBER="number";
+    public static final String DATABASE_NAME="DBnotes",TABLE_NAME="contact",KEY_ID="id",KEY_NAME="nom",KEY_TEXT="text";
 
     public DataBaseHandler(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version)
     {
@@ -24,7 +24,7 @@ public class DataBaseHandler extends SQLiteOpenHelper
         sqLiteDatabase.execSQL("create table "
                 + TABLE_NAME + " (" + KEY_ID
                 + " integer primary key, " + KEY_NAME
-                + " text not null, " + KEY_NUMBER + " text not null);");
+                + " text not null, " + KEY_TEXT + " text not null);");
     }
 
     @Override

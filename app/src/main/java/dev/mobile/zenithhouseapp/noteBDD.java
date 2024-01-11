@@ -5,7 +5,7 @@ import static dev.mobile.zenithhouseapp.DataBaseHandler.DATABASE_NAME;
 import static dev.mobile.zenithhouseapp.DataBaseHandler.DATABASE_VERSION;
 import static dev.mobile.zenithhouseapp.DataBaseHandler.KEY_ID;
 import static dev.mobile.zenithhouseapp.DataBaseHandler.KEY_NAME;
-import static dev.mobile.zenithhouseapp.DataBaseHandler.KEY_NUMBER;
+import static dev.mobile.zenithhouseapp.DataBaseHandler.KEY_TEXT;
 import static dev.mobile.zenithhouseapp.DataBaseHandler.TABLE_NAME;
 
 import android.content.ContentValues;
@@ -16,41 +16,41 @@ import android.database.sqlite.SQLiteDatabase;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ContactBDD implements Serializable
+public class noteBDD implements Serializable
 {
     private SQLiteDatabase mDb;
-    private DataBaseHandler DBcontacts;
+    private DataBaseHandler DBnotes;
 
-    public ContactBDD(Context context)
+    public noteBDD(Context context)
     {
-        DBcontacts = new DataBaseHandler(context, DATABASE_NAME, null, DATABASE_VERSION);
+        DBnotes = new DataBaseHandler(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     public SQLiteDatabase openEcriture()
     {
-        mDb = DBcontacts.getWritableDatabase();
+        mDb = DBnotes.getWritableDatabase();
         return mDb;
     }
 
     public SQLiteDatabase openLecture()
     {
-        mDb = DBcontacts.getReadableDatabase();
+        mDb = DBnotes.getReadableDatabase();
         return mDb;
     }
 
-    public long addContact(Contact c)
+    public long addnotes(note n)
     {
         mDb=this.openEcriture();
         ContentValues v = new ContentValues();
 
-        v.put(KEY_NAME, c.getNom());
-        v.put(KEY_NUMBER, c.getNumber());
+        v.put(KEY_NAME, n.getNom());
+        v.put(KEY_TEXT, n.getText());
 
         long i = mDb.insert(TABLE_NAME, null, v);
         return i;
     }
 
-    public Contact searchContact(int id)
+    public note searchnotes(int id)
     {
         String Query = "SELECT * FROM " + TABLE_NAME+" where "+KEY_ID+"=?";
         mDb = this.openLecture();
@@ -61,23 +61,23 @@ public class ContactBDD implements Serializable
             return null;
         }
 
-        Contact oc= new Contact();
+        note nt= new note();
 
         if(curseur.moveToFirst())
         {
-            oc.setNom(curseur.getString(1));
-            oc.setNumber(curseur.getString(2));
+            nt.setNom(curseur.getString(1));
+            nt.setText(curseur.getString(2));
         }
 
         curseur.close();
         mDb.close();
-        return oc;
+        return nt;
     }
 
-    public ArrayList<Contact> getAllContacts()
+    public ArrayList<note> getAllnotes()
     {
         mDb=openLecture();
-        Cursor c = mDb.query(TABLE_NAME, new String[]{KEY_ID,KEY_NAME, KEY_NUMBER },
+        Cursor c = mDb.query(TABLE_NAME, new String[]{KEY_ID,KEY_NAME, KEY_TEXT},
                 null, null, null,
                 null, null);
 
@@ -87,40 +87,40 @@ public class ContactBDD implements Serializable
         }
 
         //creation de la liste contact
-        ArrayList<Contact> retContact = new ArrayList<>(c.getCount());
+        ArrayList<note> retnote = new ArrayList<>(c.getCount());
         c.moveToFirst();
 
         do {
-            Contact contact = new Contact();
+            note nt = new note();
 
-            contact.setId(c.getInt(0));
-            contact.setNom(c.getString(1));
-            contact.setNumber(c.getString(2));
+             nt.setId(c.getInt(0));
+            nt.setNom(c.getString(1));
+            nt.setText(c.getString(2));
 
-            retContact.add(contact);
+            retnote.add(nt);
         } while (c.moveToNext());
 
         c.close();
         mDb.close();
-        return retContact;
+        return retnote;
     }
 
-    public void deleteContact(Contact contact)
+    public void deletenotes(note note)
     {
         mDb=this.openEcriture();
-        mDb.delete(TABLE_NAME, KEY_ID + "=?", new String[] {String.valueOf(contact.getId())});
+        mDb.delete(TABLE_NAME, KEY_ID + "=?", new String[] {String.valueOf(note.getId())});
         mDb.close();
     }
 
-    public int updateContact(Contact c)
+    public int updatenotes(note n)
     {
         SQLiteDatabase DB =openEcriture();
         ContentValues values = new ContentValues();
 
-        values.put(KEY_NAME, c.getNom());
-        values.put(KEY_NUMBER, c.getNumber());
+        values.put(KEY_NAME, n.getNom());
+        values.put(KEY_TEXT, n.getText());
 
-        return DB.update(TABLE_NAME, values, KEY_ID + " = ?", new String[] { String.valueOf(c.getId()) });
+        return DB.update(TABLE_NAME, values, KEY_ID + " = ?", new String[] { String.valueOf(n.getId()) });
 
     }
 }

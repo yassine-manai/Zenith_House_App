@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtvnom"
+        android:id="@+id/txtvsujet"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="20sp"
@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtnumero"
+        android:id="@+id/txt"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:text="Text"

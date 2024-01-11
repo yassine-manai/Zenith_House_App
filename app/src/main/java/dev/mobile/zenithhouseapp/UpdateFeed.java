@@ -1,9 +1,7 @@
 package dev.mobile.zenithhouseapp;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,45 +10,32 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
+import java.io.IOException;
+
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UpdateFeed#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class UpdateFeed extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private EditText id, name, phone, feed;
     private Button btnUpdate;
     private TextView updateError;
 
+    private String mParam1;
+    private String mParam2;
+
     public UpdateFeed() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UpdateFeed.
-     */
-    // TODO: Rename and change types and number of parameters
     public static UpdateFeed newInstance(String param1, String param2) {
         UpdateFeed fragment = new UpdateFeed();
         Bundle args = new Bundle();
@@ -97,40 +82,54 @@ public class UpdateFeed extends Fragment {
         String ffed = feed.getText().toString().trim();
 
         // Ensure ID is not empty
-        if (idf.isEmpty())
-        {
+        if (idf.isEmpty()) {
             Toast.makeText(getActivity(), "Please enter a Feed ID", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        // Create a FeedRequestBody instance and set its properties
+        FeedRequestBody requestBody = new FeedRequestBody(Integer.parseInt(idf), namef, phonef, ffed);
 
         String URL = getArguments().getString("url", "");
         Retrofit retrofit = new Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create()).build();
 
         ApiHandler api = retrofit.create(ApiHandler.class);
-        Call<feeds> updateUserCall = api.updatetfeeds(Integer.parseInt(idf), namef, phonef, ffed);
+        Call<feeds> updateUserCall = api.updatetfeeds(requestBody);
 
-        updateUserCall.enqueue(new Callback<feeds>()
-        {
+        updateUserCall.enqueue(new Callback<feeds>() {
             @Override
-            public void onResponse(Response<feeds> response, Retrofit retrofit)
-            {
-                if (response.isSuccess())
-                {
-                    Toast.makeText(getActivity(), "User updated", Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    Toast.makeText(getActivity(), "Update failed", Toast.LENGTH_SHORT).show();
+            public void onResponse(Response<feeds> response, Retrofit retrofit) {
+                if (response.isSuccess()) {
+                    // Log successful response
+                    Log.d("UpdateFeed", "Feed updated successfully. Response: " + response.body());
+
+                    // You can update your UI here if needed
+                    Toast.makeText(getActivity(), "Feed updated", Toast.LENGTH_LONG).show();
+                } else {
+                    try {
+                        // Log error response
+                        String errorBody = response.errorBody().string();
+                        Log.e("UpdateFeed", "Error response: " + errorBody);
+
+                        // Display error message in UI
+                        Toast.makeText(getActivity(), "Update failed: " + errorBody, Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Throwable t)
-            {
+            public void onFailure(Throwable t) {
+                // Log failure
+                Log.e("UpdateFeed", "Update failed: " + t.getLocalizedMessage());
+
+                // Display error message in UI
                 Toast.makeText(getActivity(), "Update failed: " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 updateError.setText(t.getLocalizedMessage());
             }
-
         });
+
+
     }
 }

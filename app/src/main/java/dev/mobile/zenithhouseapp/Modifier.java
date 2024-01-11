@@ -67,10 +67,10 @@ public class Modifier extends Fragment
 
         EditText editId = view.findViewById(R.id.editid);
         EditText editNom = view.findViewById(R.id.editnom);
-        EditText editNum = view.findViewById(R.id.editnum);
+        EditText editTxt = view.findViewById(R.id.editnum);
         Button modifyButton = view.findViewById(R.id.modify);
 
-        ContactBDD db = new ContactBDD(getActivity());
+        noteBDD db = new noteBDD(getActivity());
 
         editId.setOnClickListener(new View.OnClickListener()
         {
@@ -80,12 +80,12 @@ public class Modifier extends Fragment
                 editId.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
-                        Contact C = db.searchContact(Integer.parseInt(editId.getText().toString()));
+                        note n = db.searchnotes(Integer.parseInt(editId.getText().toString()));
 
-                        if (C != null)
+                        if (n != null)
                         {
-                            editNom.setText(C.getNom());
-                            editNum.setText(C.getNumber());
+                            editNom.setText(n.getNom());
+                            editTxt.setText(n.getText());
                         }
                         else
                         {
@@ -101,14 +101,14 @@ public class Modifier extends Fragment
             @Override
             public void onClick(View view)
             {
-                int contactId = Integer.parseInt(editId.getText().toString());
-                String contactName = editNom.getText().toString();
-                String contactNumber = editNum.getText().toString();
+                int NoteId = Integer.parseInt(editId.getText().toString());
+                String noteName = editNom.getText().toString();
+                String noteText = editTxt.getText().toString();
 
-                Contact contact = new Contact(contactName, contactNumber);
-                contact.setId(contactId);
+                note nt = new note(noteName, noteText);
+                nt.setId(NoteId);
 
-                int result = db.updateContact(contact);
+                int result = db.updatenotes(nt);
 
                 if (result != 0)
                 {

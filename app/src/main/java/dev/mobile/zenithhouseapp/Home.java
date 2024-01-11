@@ -87,7 +87,7 @@ public class Home extends Fragment
         Binding = FragmentHomeBinding.inflate(getLayoutInflater());
         View view = Binding.getRoot();
 
-        mDatabase = FirebaseDatabase.getInstance("https://zha-1-430a4-default-rtdb.firebaseio.com");
+        mDatabase = FirebaseDatabase.getInstance("https://zha2-cb6f9-default-rtdb.firebaseio.com/");
 
         mStatHome = mDatabase.getReference().child("Home");
         mStatR1 = mDatabase.getReference().child("Room1");

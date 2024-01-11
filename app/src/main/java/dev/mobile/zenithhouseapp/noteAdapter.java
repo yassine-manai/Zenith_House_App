@@ -13,33 +13,34 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+import dev.mobile.zenithhouseapp.databinding.RcvitemBinding;
 import dev.mobile.zenithhouseapp.databinding.RecycleviewitemBinding;
 
 
-public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
+public class noteAdapter extends RecyclerView.Adapter<noteAdapter.noteViewHolder> {
 
-    private List<Contact> listeContact;
+    private List<note> listenote;
     private Context context;
 
-    public ContactAdapter(Context context, List<Contact> listeContact)
+    public noteAdapter(Context context, List<note> listenote)
     {
         this.context = context;
-        this.listeContact = listeContact;
+        this.listenote = listenote;
     }
 
     @NonNull
     @Override
-    public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public noteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         RecycleviewitemBinding binding = RecycleviewitemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new ContactViewHolder(binding);
+        return new noteViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(final ContactViewHolder holder, @SuppressLint("RecyclerView") final int position)
+    public void onBindViewHolder(final noteViewHolder holder, @SuppressLint("RecyclerView") final int position)
     {
-        Contact contact = listeContact.get(position);
-        holder.bind(contact);
+        note Notes = listenote.get(position);
+        holder.bind(Notes);
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener()
         {
@@ -48,20 +49,20 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Confirmation de Suppression");
-                builder.setMessage("Suppression de cet contact " + listeContact.get(position).getNom() + " de cette liste");
+                builder.setMessage("Suppression de cet Note " + listenote.get(position).getId() + " de cette liste");
 
                 builder.setPositiveButton("Oui !", new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        ContactBDD db = new ContactBDD(context);
-                        db.deleteContact(listeContact.get(position));
-                        Toast.makeText(context, "Suppression du note" + position + " " + listeContact.get(position).getNumber() + " avec succès", Toast.LENGTH_LONG).show();
+                        noteBDD db = new noteBDD(context);
+                        db.deletenotes(listenote.get(position));
+                        Toast.makeText(context, "Suppression du note" + position + " " + listenote.get(position).getId() + " avec succès", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
 
                         int positionStart = holder.getAdapterPosition();
-                        listeContact.remove(positionStart);
+                        listenote.remove(positionStart);
                         notifyItemRemoved(positionStart);
                     }
                 });
@@ -85,24 +86,24 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     @Override
     public int getItemCount()
     {
-        return listeContact.size();
+        return listenote.size();
     }
 
-    public static class ContactViewHolder extends RecyclerView.ViewHolder
+    public static class noteViewHolder extends RecyclerView.ViewHolder
     {
         private final RecycleviewitemBinding binding;
 
-        public ContactViewHolder(RecycleviewitemBinding binding)
+        public noteViewHolder(RecycleviewitemBinding binding)
         {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public void bind(Contact contact)
+        public void bind(note note)
         {
-            binding.txtid.setText("ID: " + contact.getId());
-            binding.txtvnom.setText("Sujet: " + contact.getNom());
-            binding.txtnumero.setText(": " + contact.getNumber());
+            binding.txtid.setText("ID: " + note.getId());
+            binding.txtvsujet.setText("Sujet: " + note.getNom());
+            binding.txt.setText("Text: " + note.getText());
         }
     }
 }
