@@ -24,9 +24,13 @@
     <EditText
         android:id="@+id/et_delete"
         android:layout_width="250dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textStyle="bold"
+        android:background="@drawable/input"
         android:textSize="20sp"
+        android:gravity="center"
+        android:hint="Feed ID"
+        android:textColorHint="@color/black"
         android:layout_height="50dp" />
 
     <Button
