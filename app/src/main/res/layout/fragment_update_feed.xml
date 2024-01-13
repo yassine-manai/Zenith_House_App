@@ -32,7 +32,7 @@
         android:background="@drawable/input"
         android:gravity="center"
         android:textColorHint="@color/black"
-        android:hint="Feed ID"
+        android:hint="Feedback ID"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -40,45 +40,53 @@
     <EditText
         android:id="@+id/et_updated_name"
         android:layout_width="250dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textColorHint="@color/black"
-        android:layout_margin="10dp"
-        android:background="@drawable/input"
         android:layout_height="45dp"
         android:layout_below="@id/et_user_id"
-        android:hint="Updated Feed Name" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/input"
+        android:gravity="center"
+        android:hint="Updated Feedback Name"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et_updated_username"
         android:layout_width="250dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textColorHint="@color/black"
-        android:layout_margin="10dp"
-        android:background="@drawable/input"
         android:layout_height="45dp"
         android:layout_below="@id/et_updated_name"
-        android:hint="Updated Feed Number" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/input"
+        android:gravity="center"
+        android:hint="Updated Feedback Number"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et_updated_email"
         android:layout_width="250dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColorHint="@color/black"
-        android:textSize="20sp"
-        android:layout_margin="10dp"
-        android:background="@drawable/input"
         android:layout_height="45dp"
         android:layout_below="@id/et_updated_username"
-        android:hint="Updated Feed"
-         />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/input"
+        android:gravity="center"
+        android:hint="Updated Feedback"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 
 
@@ -88,8 +96,9 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
+        android:textColor="@color/white"
         android:layout_below="@id/et_updated_email"
-        android:text="Update Feed" />
+        android:text="Update Feedback" />
 
 
 </RelativeLayout>

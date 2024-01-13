@@ -103,29 +103,58 @@ public class activity_Login extends AppCompatActivity {
         return true;
     }
 
-    private void loginUserFromServer(String email, String password) {
+    private void loginUserFromServer(String email, String password)
+    {
         Call<List<User>> call = apiService.loginUser(email, password);
-        call.enqueue(new Callback<List<User>>() {
+        call.enqueue(new Callback<List<User>>()
+        {
             @Override
-            public void onResponse(Response<List<User>> response, Retrofit retrofit) {
-                if (response.isSuccess() && response.body() != null && response.body().size() > 0) {
+            public void onResponse(Response<List<User>> response, Retrofit retrofit)
+            {
+                if (response.isSuccess() && response.body() != null && response.body().size() > 0)
+                {
+                    List<User> userList = response.body();
 
+                    boolean credentialsMatch = false;
+
+                    for (User user : userList)
+                    {
+                        if (user.getEmail().equals(email) && user.getPassword().equals(password))
+                        {
+                            credentialsMatch = true;
+                            break;
+                        }
+                        else
+                        {
+                            credentialsMatch = false;
+                        }
+                    }
+
+                    if (credentialsMatch)
+                    {
                         Toast.makeText(activity_Login.this, "Welcome User", Toast.LENGTH_LONG).show();
                         Intent start = new Intent(activity_Login.this, MainActivity.class);
                         startActivity(start);
-                    } else {
-                        Toast.makeText(activity_Login.this, "User Not Found", Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(activity_Login.this, "Incorrect email or password", Toast.LENGTH_LONG).show();
                     }
                 }
+                else
+                {
+                    Toast.makeText(activity_Login.this, "User Not Found", Toast.LENGTH_LONG).show();
+                }
+            }
 
-
-                @Override
+            @Override
             public void onFailure(Throwable t)
             {
                 Toast.makeText(activity_Login.this, "Failed to login. " + t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.e("Retrofit", "Failed to execute API request", t);
             }
-
         });
     }
+
+
 }

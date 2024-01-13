@@ -15,7 +15,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/back" />
-    é
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
 
     <EditText
         android:id="@+id/et_id_add"
-        android:hint=" Feed ID "
+        android:hint=" Feedback ID "
         android:layout_width="250dp"
         android:textColor="@color/black"
         android:textStyle="bold"
@@ -58,7 +58,7 @@
 
     <EditText
         android:id="@+id/et_username_add"
-        android:hint="N° du Téléphone"
+        android:hint="N° de Téléphone"
         android:layout_width="250dp"
         android:textColor="@color/black"
         android:textStyle="bold"

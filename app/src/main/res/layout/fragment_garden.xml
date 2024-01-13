@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@color/black"
     android:layout_height="match_parent"
     tools:context=".Garden">
 
@@ -17,7 +17,7 @@
         android:layout_marginEnd="42dp"
         android:fontFamily="sans-serif"
         android:text=" Garden "
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="35sp"
         android:layout_marginLeft="10dp"
         android:textStyle="bold" />

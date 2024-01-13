@@ -12,9 +12,21 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="99dp"
+        android:layout_marginStart="100dp"
         android:layout_marginBottom="50dp"
+
         android:src="@drawable/back" />
+
+    <TextView
+        android:id="@+id/modiftext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modifier note"
+        android:textColor="@color/white"
+        android:layout_below="@id/back"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
 
     <EditText
         android:id="@+id/editid"
@@ -22,7 +34,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/back"
+        android:layout_below="@id/modiftext"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/button"
@@ -35,17 +47,20 @@
 
     <EditText
         android:id="@+id/editnom"
-        android:layout_below="@id/editid"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_below="@id/editid"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/button"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:layout_margin="20dp"
-        android:inputType="text"
-        android:hint="Date"
         android:ems="10"
-        android:gravity="center" />
+        android:gravity="center"
+        android:hint="Date"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
 
     <EditText
         android:id="@+id/editnum"
@@ -66,6 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/editnum"
+        android:textColor="@color/white"
         android:background="@drawable/input_bg"
         android:layout_marginLeft="70dp"
         android:layout_marginTop="20dp"

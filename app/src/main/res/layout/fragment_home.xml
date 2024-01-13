@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/white"
+        android:background="@color/black"
         android:layout_height="match_parent">
 
 
@@ -31,12 +31,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="71dp"
+            android:layout_marginEnd="38dp"
             android:layout_marginBottom="15dp"
             android:layout_toStartOf="@+id/reminder"
             android:fontFamily="sans-serif"
             android:text=" Welcome Home "
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -187,7 +187,7 @@
             android:layout_marginTop="8dp"
             android:padding="2dp"
             android:text="Room 1  "
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -318,7 +318,7 @@
             android:layout_marginTop="8dp"
             android:padding="2dp"
             android:text="Room 2  "
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -449,7 +449,7 @@
             android:layout_marginTop="8dp"
             android:padding="2dp"
             android:text="SERVER ROOM"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -585,7 +585,7 @@
             android:layout_marginTop="8dp"
             android:padding="2dp"
             android:text="Room 3  "
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 

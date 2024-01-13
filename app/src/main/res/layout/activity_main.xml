@@ -19,6 +19,7 @@
 
 
     <FrameLayout
+        android:background="@color/black"
         android:id="@+id/addplaceholer"
         android:layout_width="match_parent"
         android:layout_height="650dp"
