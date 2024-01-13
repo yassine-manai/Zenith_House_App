@@ -1,11 +1,13 @@
 package dev.mobile.zenithhouseapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,12 +32,13 @@ public class DeleteFeed extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private EditText feedIdToDelete;
     private Button btnDeletefeed;
     private TextView deleteError;
+    private ImageView back;
+    private EditText edit;
+
 
     public DeleteFeed() {
-        // Required empty public constructor
     }
 
     public static DeleteFeed newInstance(String param1, String param2) {
@@ -61,13 +64,26 @@ public class DeleteFeed extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_delete_feed, container, false);
 
-        feedIdToDelete = v.findViewById(R.id.et_user_id_to_delete);
+        edit = (EditText) v.findViewById(R.id.et_delete);
         btnDeletefeed = v.findViewById(R.id.btnDeleteUser);
         deleteError = v.findViewById(R.id.delete_error);
+        //back = v.findViewById(R.id.back);
 
-        btnDeletefeed.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
+                Intent home = new Intent(getActivity(), MainActivity.class);
+                startActivity(home);
+            }
+        });
+
+        btnDeletefeed.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
                 deleteUser();
             }
         });
@@ -75,16 +91,16 @@ public class DeleteFeed extends Fragment {
         return v;
     }
 
-    private void deleteUser() {
-        String id = feedIdToDelete.getText().toString().trim();
+    private void deleteUser()
+    {
+        String id = edit.getText().toString().trim();
 
-        // Ensure ID is not empty
-        if (id.isEmpty()) {
+        if (id.isEmpty())
+        {
             Toast.makeText(getActivity(), "Please enter a Feed ID", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Retrieve URL from arguments
         String URL = getArguments().getString("url", "");
         Retrofit retrofit = new Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create()).build();
 
@@ -93,19 +109,24 @@ public class DeleteFeed extends Fragment {
 
         Call<Void> deleteUserCall = api.deletefeeds(requestBody);
 
-        deleteUserCall.enqueue(new Callback<Void>() {
+        deleteUserCall.enqueue(new Callback<Void>()
+        {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
-                if (response.isSuccess()) {
+            public void onResponse(Response<Void> response, Retrofit retrofit)
+            {
+                if (response.isSuccess())
+                {
                     Toast.makeText(getActivity(), "Feed deleted", Toast.LENGTH_LONG).show();
-                    // You might want to clear the ID field or perform any other UI update here
-                } else {
+                }
+                else
+                {
                     Toast.makeText(getActivity(), "Delete failed", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Throwable t) {
+            public void onFailure(Throwable t)
+            {
                 Toast.makeText(getActivity(), "Delete failed: " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 deleteError.setText(t.getLocalizedMessage());
             }

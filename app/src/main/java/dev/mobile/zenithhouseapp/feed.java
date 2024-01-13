@@ -17,7 +17,8 @@ public class feed extends AppCompatActivity {
 
     @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
@@ -29,50 +30,61 @@ public class feed extends AppCompatActivity {
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
+            new BottomNavigationView.OnNavigationItemSelectedListener()
+            {
                 @SuppressLint("NonConstantResourceId")
                 @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                public boolean onNavigationItemSelected(@NonNull MenuItem item)
+                {
                     Fragment selectedFragment = null;
 
-                    if (item.getItemId() == R.id.addfeed) {
+                    if (item.getItemId() == R.id.addfeed)
+                    {
                         selectedFragment = new AddFeed();
-                    }  if (item.getItemId() == R.id.listfeed) {
+                    }
+
+                    if (item.getItemId() == R.id.listfeed)
+                    {
                         selectedFragment = new ListerFragment();
-                    }  if (item.getItemId() == R.id.updatefeed) {
+                    }
+
+                    if (item.getItemId() == R.id.updatefeed)
+                    {
                         selectedFragment = new UpdateFeed();
-                    } if (item.getItemId() == R.id.deletefeed) {
+                    }
+
+                    if (item.getItemId() == R.id.deletefeed)
+                    {
                         selectedFragment = new DeleteFeed();
                     }
 
-                    if (selectedFragment != null) {
-                        // Pass data to the fragment using a bundle
+                    if (selectedFragment != null)
+                    {
                         Bundle bundle = new Bundle();
-                        bundle.putString("url", "https://745b-196-176-164-36.ngrok-free.app/ZHA:80");
+                        bundle.putString("url", "https://d98b-196-176-164-36.ngrok-free.app/ZHA:80");
                         selectedFragment.setArguments(bundle);
 
-                        // Load the selected fragment
                         loadFragment(selectedFragment);
                         return true;
-                    } else {
-                        return false; // No fragment selected
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
             };
 
-    private void loadFragment(Fragment fragment) {
-        // Replace the current fragment with the selected one
+    private void loadFragment(Fragment fragment)
+    {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-        // Pass data to the fragment using a bundle
         Bundle bundle = new Bundle();
-        bundle.putString("url", "https://745b-196-176-164-36.ngrok-free.app/ZHA:80");
+        bundle.putString("url", "https://d98b-196-176-164-36.ngrok-free.app/ZHA:80");
         fragment.setArguments(bundle);
 
         transaction.replace(R.id.navretroadd, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
 }

@@ -1,5 +1,6 @@
 package dev.mobile.zenithhouseapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -7,12 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-
-import java.io.IOException;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -28,12 +28,12 @@ public class AddFeed extends Fragment {
     private EditText idf, nom_add, phn_add, suggest_add;
     private Button BtnAdd;
     private TextView err;
+    private ImageView back;
 
     private String mParam1;
     private String mParam2;
 
     public AddFeed() {
-        // Required empty public constructor
     }
 
     public static AddFeed newInstance(String param1, String param2) {
@@ -55,8 +55,8 @@ public class AddFeed extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View v = inflater.inflate(R.layout.fragment_add_feed, container, false);
 
         idf = v.findViewById(R.id.et_id_add);
@@ -65,72 +65,80 @@ public class AddFeed extends Fragment {
         suggest_add = v.findViewById(R.id.et_password_add);
         BtnAdd = v.findViewById(R.id.btnAddUser);
         err = v.findViewById(R.id.error);
+        back = v.findViewById(R.id.back);
 
-        BtnAdd.setOnClickListener(new View.OnClickListener() {
+        BtnAdd.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 addFeed();
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent home = new Intent(getActivity(), MainActivity.class);
+                startActivity(home);
             }
         });
 
         return v;
     }
 
-    private void addFeed() {
+    private void addFeed()
+    {
         String idStr = idf.getText().toString().trim();
         String name = nom_add.getText().toString().trim();
         String number = phn_add.getText().toString().trim();
         String feed = suggest_add.getText().toString().trim();
 
-        // Check for empty fields
-        if (TextUtils.isEmpty(idStr) || TextUtils.isEmpty(name) || TextUtils.isEmpty(number) || TextUtils.isEmpty(feed)) {
-            Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(idStr) || TextUtils.isEmpty(name) || TextUtils.isEmpty(number) || TextUtils.isEmpty(feed))
+        {
+            Toast.makeText(getActivity(), "Les Champs sont obligatoires . . .", Toast.LENGTH_SHORT).show();
             return;
         }
 
         int id = Integer.parseInt(idStr);
 
-        // Retrieve URL from arguments
         String URL = getArguments().getString("url", "");
 
-        // Create a Retrofit instance
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        // Create an instance of the ApiHandler interface
         ApiHandler api = retrofit.create(ApiHandler.class);
 
-        // Create an instance of FeedRequestBody
         FeedRequestBody requestBody = new FeedRequestBody(id, name, number, feed);
 
-        // Make the API call
         Call<feeds> addfeed = api.insertfeeds(requestBody);
 
-        addfeed.enqueue(new Callback<feeds>() {
+        addfeed.enqueue(new Callback<feeds>()
+        {
             @Override
-            public void onResponse(Response<feeds> response, Retrofit retrofit) {
-                if (response.isSuccess()) {
-                    // HTTP status code is in the range [200, 300)
-                    if (response.body() != null) {
+            public void onResponse(Response<feeds> response, Retrofit retrofit)
+            {
+                if (response.isSuccess())
+                {
+                    if (response.body() != null)
+                    {
                         Toast.makeText(getActivity(), "Feeds added", Toast.LENGTH_LONG).show();
                     }
-                } else {
-                    // HTTP status code is outside the range [200, 300)
-                    try {
-                        String errorBody = response.errorBody().string();
-                        Toast.makeText(getActivity(), "Failed: " + errorBody, Toast.LENGTH_LONG).show();
-                        err.setText(errorBody); // Update the error text view
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    else
+                    {
+                        Toast.makeText(getActivity(), "Feed nt added", Toast.LENGTH_LONG).show();
                     }
                 }
             }
 
 
             @Override
-            public void onFailure(Throwable t) {
+            public void onFailure(Throwable t)
+            {
                 Toast.makeText(getActivity(), "Failed: " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 err.setText(t.getLocalizedMessage());
             }

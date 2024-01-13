@@ -13,6 +13,7 @@
     <string name="update_user">UPDATE</string>
     <string name="list_user">LIST</string>
     <string name="del_user">DELETE</string>
+    <string name="enter_feed_id">Enter Feed ID</string>
 
 
 </resources>

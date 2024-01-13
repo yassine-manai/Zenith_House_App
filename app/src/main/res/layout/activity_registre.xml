@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE"
+    tools:context=".activity_registre">
+
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/shape"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:id="@+id/shapereg"/>
+
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/textLog"
+    android:text="Register Now "
+    android:layout_below="@id/shapereg"
+    android:layout_centerHorizontal="true"
+    android:fontFamily="@font/poppinsbold"
+    android:textSize="25sp"
+    android:textColor="@color/black"
+    android:textStyle="bold"
+    />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/txt"
+    android:text=" Let's Manage Home From Any Place "
+    android:layout_below="@id/textLog"
+    android:layout_centerHorizontal="true"
+    android:fontFamily="sans-serif"
+    android:textSize="12sp"
+    android:layout_marginTop="15dp"
+    android:textColor="@color/black"
+    android:textStyle="bold"
+    />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_below="@id/txt"
+    android:id="@+id/editsreg"
+    android:padding="30dp"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@drawable/input_bg"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:fontFamily="@font/poppinsregular"
+        android:paddingLeft="10dp"
+        android:inputType="text"
+        android:id="@+id/NameRegEdit"
+        android:hint="Enter your Name" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@drawable/input_bg"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        android:inputType="textEmailAddress"
+        android:fontFamily="@font/poppinsregular"
+        android:textColorHint="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/EmailRegEdit"
+        android:hint="Enter your Email" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@drawable/input_bg"
+        android:textColorHint="@color/black"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        android:inputType="textPassword"
+        android:fontFamily="@font/poppinsregular"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/PassRegEdit"
+        android:hint="Enter your Password"
+        tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/Rshow"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/PassRegEdit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/eye" />
+
+        <ImageView
+            android:id="@+id/Rhide"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/PassRegEdit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/hidden" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@drawable/input_bg"
+        android:fontFamily="@font/poppinsregular"
+        android:textColorHint="@color/black"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        android:inputType="textPassword"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/PassConfRegEdit"
+        android:hint="Confirm your Password"
+        tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/Rshow2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/PassConfRegEdit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/eye" />
+
+        <ImageView
+            android:id="@+id/Rhide2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/PassConfRegEdit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/hidden" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
+
+<Button
+    android:layout_width="285dp"
+    android:layout_height="49dp"
+    android:id="@+id/btnRegister"
+    android:layout_below="@+id/editsreg"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="50dp"
+    android:textColor="@color/white"
+    android:textSize="20dp"
+    android:textStyle="bold"
+    android:text="Register"
+    android:background="@drawable/button"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnRegister"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            android:layout_marginTop="1dp"
+            android:fontFamily="@font/poppinsregular"
+            android:text="Already have an account?"
+            android:layout_below="@id/btnRegister"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/logRegBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="2dp"
+            android:text="  Login "
+            android:textColor="@color/primaryColor"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.IOException;
 import java.util.List;
 
 import retrofit.Call;
@@ -60,19 +58,23 @@ public class ListerFragment extends Fragment {
 
     @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View v = inflater.inflate(R.layout.fragment_lister2, container, false);
 
         recyclerViewUser = v.findViewById(R.id.feed_recycleview);
         layoutManager = new LinearLayoutManager(getActivity());
 
-        if (recyclerViewUser != null) {
+        if (recyclerViewUser != null)
+        {
             Bundle args = getArguments();
 
-            if (args != null) {
+            if (args != null)
+            {
                 String URL = args.getString("url", "");
 
-                if (!URL.isEmpty()) {
+                if (!URL.isEmpty())
+                {
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl(URL)
                             .addConverterFactory(GsonConverterFactory.create())
@@ -81,46 +83,54 @@ public class ListerFragment extends Fragment {
                     ApiHandler api = retrofit.create(ApiHandler.class);
 
                     Call<List<feeds>> userListCall = api.getAllfeeds();
-                    userListCall.enqueue(new Callback<List<feeds>>() {
+                    userListCall.enqueue(new Callback<List<feeds>>()
+                    {
                         @Override
-                        public void onResponse(Response<List<feeds>> response, Retrofit retrofit) {
-                            if (response.isSuccess()) {
-                                // HTTP status code is in the range [200, 300)
+                        public void onResponse(Response<List<feeds>> response, Retrofit retrofit)
+                        {
+                            if (response.isSuccess())
+                            {
                                 List<feeds> listfeeds = response.body();
-                                if (listfeeds != null && !listfeeds.isEmpty()) {
+
+                                if (listfeeds != null && !listfeeds.isEmpty())
+                                {
                                     FeedAdapter userAdapter = new FeedAdapter(getActivity(), listfeeds);
 
-                                    // Set the adapter for the RecyclerView
                                     recyclerViewUser.setAdapter(userAdapter);
 
-                                    // Set up RecyclerView
-                                    if (getActivity() != null) {
+                                    if (getActivity() != null)
+                                    {
                                         recyclerViewUser.setLayoutManager(layoutManager);
-
                                     }
 
-                                    // Set the layout manager after setting the adapter
-                                } else {
+                                }
+                                else
+                                {
                                     Toast.makeText(getActivity(), "No feeds available", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
 
                         @Override
-                        public void onFailure(Throwable t) {
-                            // Handle failure
+                        public void onFailure(Throwable t)
+                        {
                         }
                     });
-                } else {
-                    Toast.makeText(getActivity(), "Error: URL is empty", Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(getActivity(), "Error: Bundle is null", Toast.LENGTH_SHORT).show();
+                else
+                {
+                    Toast.makeText(getActivity(), "URL is empty", Toast.LENGTH_SHORT).show();
+                }
             }
-        } else {
-            Toast.makeText(getActivity(), "Error: RecyclerView is null", Toast.LENGTH_SHORT).show();
+            else
+            {
+                Toast.makeText(getActivity(), "Bundle is null", Toast.LENGTH_SHORT).show();
+            }
         }
-
+        else
+        {
+            Toast.makeText(getActivity(), "RecyclerView is null", Toast.LENGTH_SHORT).show();
+        }
         return v;
     }
 }

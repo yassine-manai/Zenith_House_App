@@ -70,7 +70,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.feedViewHolder
             super (itemView);
             id = itemView.findViewById(R.id.id);
             name =itemView.findViewById(R.id.txtnom);
-            phone = itemView.findViewById(R.id.txtph);
+            phone = itemView.findViewById(R.id.txtpho);
             feed = itemView.findViewById(R.id.txtfeed);
         }
     }

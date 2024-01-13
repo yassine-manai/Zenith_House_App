@@ -4,9 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#c79595"
+    android:background="#000000"
     android:padding="16dp">
-
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,18 +22,9 @@
 
 
     <EditText
-        android:id="@+id/et_user_id_to_delete"
+        android:id="@+id/et_delete"
         android:layout_width="250dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:layout_margin="10dp"
-        android:background="@drawable/input"
-        android:layout_height="45dp"
-        android:hint="Enter Feed ID"
-        android:inputType="number"
-        android:layout_marginBottom="8dp"/>
+        android:layout_height="50dp" />
 
     <Button
         android:id="@+id/btnDeleteUser"
@@ -48,6 +38,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="#FF0000"/>
+        />
 
 </LinearLayout>

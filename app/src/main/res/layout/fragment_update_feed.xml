@@ -2,21 +2,26 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#c79595"
+    android:background="#000000"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/txt"
+        android:layout_marginBottom="22dp"
+        android:src="@drawable/back" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_margin="20dp"
         android:text="Update FeedBack"
         android:textStyle="bold"
         android:textSize="40sp"
         android:id="@id/txt"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp" />
 
     <EditText
@@ -26,8 +31,8 @@
         android:layout_below="@+id/txt"
         android:background="@drawable/input"
         android:gravity="center"
+        android:textColorHint="@color/black"
         android:hint="Feed ID"
-        android:inputType="number"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -39,6 +44,7 @@
         android:textStyle="bold"
         android:gravity="center"
         android:textSize="20sp"
+        android:textColorHint="@color/black"
         android:layout_margin="10dp"
         android:background="@drawable/input"
         android:layout_height="45dp"
@@ -52,6 +58,7 @@
         android:textStyle="bold"
         android:gravity="center"
         android:textSize="20sp"
+        android:textColorHint="@color/black"
         android:layout_margin="10dp"
         android:background="@drawable/input"
         android:layout_height="45dp"
@@ -64,6 +71,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:gravity="center"
+        android:textColorHint="@color/black"
         android:textSize="20sp"
         android:layout_margin="10dp"
         android:background="@drawable/input"

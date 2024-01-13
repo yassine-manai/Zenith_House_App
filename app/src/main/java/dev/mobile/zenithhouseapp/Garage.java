@@ -2,16 +2,15 @@ package dev.mobile.zenithhouseapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -112,7 +111,6 @@ public class Garage extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
-                // Handle error
             }
         });
 

@@ -1,15 +1,16 @@
 package dev.mobile.zenithhouseapp;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +22,7 @@ public class Ajout extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     EditText editNom,editTxt;
+    ImageView back;
     Button Ajouter;
 
     private static final String ARG_PARAM1 = "param1";
@@ -69,7 +71,18 @@ public class Ajout extends Fragment {
         editNom = v.findViewById(R.id.editNomFrag);
         editTxt = v.findViewById(R.id.editText);
         Ajouter = v.findViewById(R.id.btnFragAjouter);
+        back = v.findViewById(R.id.back);
 
+
+        back.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent home = new Intent(getActivity(), MainActivity.class);
+                startActivity(home);
+            }
+        });
         Ajouter.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -108,8 +121,6 @@ public class Ajout extends Fragment {
             }
 
         });
-
-        // Inflate the layout for this fragment
         return v;
     }
 }

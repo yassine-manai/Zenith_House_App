@@ -11,7 +11,6 @@ public class FeedIdRequestBody {
         this.id = id;
     }
 
-    // Getters and setters if needed
 
     public int getId() {
         return id;

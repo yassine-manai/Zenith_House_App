@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".Garage">
 
-    <!-- parking -->
+
+
     <TextView
         android:id="@+id/txtpark"
         android:layout_width="wrap_content"

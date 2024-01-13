@@ -7,6 +7,13 @@
     android:gravity="center"
     tools:context=".Ajout">
 
+    <ImageView
+        android:id="@+id/back"
+        android:layout_marginBottom="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/back" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,10 +60,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
-        android:background="@drawable/input_bg"
+        android:background="@color/white"
         android:text="    Ajouter    "
         android:textStyle="bold"
         android:textColor="@color/black"
         tools:ignore="ExtraText" />
+
+
 
 </LinearLayout>

@@ -1,15 +1,16 @@
 package dev.mobile.zenithhouseapp;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,24 +63,39 @@ public class Modifier extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.fragment_modifier, container, false);
 
         EditText editId = view.findViewById(R.id.editid);
         EditText editNom = view.findViewById(R.id.editnom);
         EditText editTxt = view.findViewById(R.id.editnum);
         Button modifyButton = view.findViewById(R.id.modify);
+        ImageView back = view.findViewById(R.id.back);
+
 
         noteBDD db = new noteBDD(getActivity());
+
+        back.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent home = new Intent(getActivity(), MainActivity.class);
+                startActivity(home);
+            }
+        });
 
         editId.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                editId.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                editId.setOnFocusChangeListener(new View.OnFocusChangeListener()
+                {
                     @Override
-                    public void onFocusChange(View v, boolean hasFocus) {
+                    public void onFocusChange(View v, boolean hasFocus)
+                    {
                         note n = db.searchnotes(Integer.parseInt(editId.getText().toString()));
 
                         if (n != null)
@@ -89,7 +105,7 @@ public class Modifier extends Fragment
                         }
                         else
                         {
-                            Toast.makeText(getActivity(), "Contact Introvable", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "note Introvable", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

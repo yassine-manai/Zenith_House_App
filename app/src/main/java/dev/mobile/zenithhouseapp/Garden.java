@@ -128,7 +128,6 @@ public class Garden extends Fragment
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
-                // Handle error
             }
         });
 
@@ -161,7 +160,6 @@ public class Garden extends Fragment
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
-                // Handle error
             }
         });
 
@@ -194,7 +192,6 @@ public class Garden extends Fragment
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
-                // Handle error
             }
         });
 

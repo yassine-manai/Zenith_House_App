@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    tools:context=".activity_Login">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shape"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/shapelog"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textLog"
+        android:text=" Welcome Back! "
+        android:layout_below="@id/shapelog"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/poppinsbold"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        />
+
+    <ImageView
+        android:id="@+id/txt"
+        android:layout_width="136dp"
+        android:layout_height="126dp"
+        android:layout_below="@id/textLog"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/undraw_home_screen_4n7s"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/txt"
+        android:id="@+id/editslog"
+        android:padding="30dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@drawable/input_bg"
+            android:textSize="14dp"
+            android:elevation="5dp"
+            android:textColorHint="@color/black"
+            android:fontFamily="@font/poppinsregular"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black"
+            android:id="@+id/EmailEditLogin"
+            android:hint="Enter your Email" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@drawable/input_bg"
+            android:textSize="14dp"
+            android:elevation="5dp"
+            android:fontFamily="@font/poppinsregular"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:id="@+id/PassLogEdit"
+            android:inputType="textPassword"
+            android:hint="Enter your Password" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="285dp"
+        android:layout_height="49dp"
+        android:id="@+id/btnRegister"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/editslog"
+        android:layout_centerHorizontal="true"
+        android:text="LOGIN"
+        android:elevation="25dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:background="@drawable/button"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnRegister"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            android:layout_marginTop="1dp"
+            android:fontFamily="@font/poppinsregular"
+            android:text="Not have an account?"
+            android:layout_below="@id/btnRegister"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/logRegBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="2dp"
+            android:text="  Register "
+            android:textColor="@color/primaryColor"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -8,12 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
-import dev.mobile.zenithhouseapp.databinding.RcvitemBinding;
 import dev.mobile.zenithhouseapp.databinding.RecycleviewitemBinding;
 
 
@@ -49,7 +50,7 @@ public class noteAdapter extends RecyclerView.Adapter<noteAdapter.noteViewHolder
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Confirmation de Suppression");
-                builder.setMessage("Suppression de cet Note " + listenote.get(position).getId() + " de cette liste");
+                builder.setMessage("Suppression de cette Note " + listenote.get(position).getId() + " de cette liste");
 
                 builder.setPositiveButton("Oui !", new DialogInterface.OnClickListener()
                 {

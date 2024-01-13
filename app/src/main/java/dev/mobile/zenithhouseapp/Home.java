@@ -148,7 +148,6 @@ public class Home extends Fragment
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
-                // Handle error
             }
         });
 
@@ -181,7 +180,6 @@ public class Home extends Fragment
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
-                // Handle error
             }
         });
 
@@ -239,7 +237,6 @@ public class Home extends Fragment
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
-                // Handle error
             }
         });
 
