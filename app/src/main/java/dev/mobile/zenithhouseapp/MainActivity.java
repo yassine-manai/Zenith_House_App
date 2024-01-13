@@ -66,13 +66,12 @@ public class MainActivity extends AppCompatActivity
             };
 
 
-private void loadFragment(Fragment fragment)
-{
-        // Replace the current fragment with the selected one
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.addplaceholer, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        private void loadFragment(Fragment fragment)
+        {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.addplaceholer, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
 }

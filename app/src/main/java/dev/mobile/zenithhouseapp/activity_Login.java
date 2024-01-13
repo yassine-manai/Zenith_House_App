@@ -18,13 +18,15 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class activity_Login extends AppCompatActivity {
+public class activity_Login extends AppCompatActivity
+{
 
     private ActivityLoginBinding Bind;
     private ApiHandler apiService;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         Bind = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = Bind.getRoot();
@@ -64,24 +66,30 @@ public class activity_Login extends AppCompatActivity {
         // Create ApiService instance
         apiService = retrofit.create(ApiHandler.class);
 
-        Bind.btnRegister.setOnClickListener(new View.OnClickListener() {
+        Bind.btnRegister.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 handleLogin();
             }
         });
 
-        Bind.logRegBtn.setOnClickListener(new View.OnClickListener() {
+        Bind.logRegBtn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent start = new Intent(activity_Login.this, activity_registre.class);
                 startActivity(start);
             }
         });
     }
 
-    private void handleLogin() {
-        if (validateInput()) {
+    private void handleLogin()
+    {
+        if (validateInput())
+        {
             loginUserFromServer(
                     Bind.EmailEditLogin.getText().toString(),
                     Bind.PassLogEdit.getText().toString()
@@ -89,13 +97,16 @@ public class activity_Login extends AppCompatActivity {
         }
     }
 
-    private boolean validateInput() {
-        if (Bind.EmailEditLogin.getText().toString().isEmpty()) {
+    private boolean validateInput()
+    {
+        if (Bind.EmailEditLogin.getText().toString().isEmpty())
+        {
             Bind.EmailEditLogin.setError("REQUIRED !");
             return false;
         }
 
-        if (Bind.PassLogEdit.getText().toString().isEmpty()) {
+        if (Bind.PassLogEdit.getText().toString().isEmpty())
+        {
             Bind.PassLogEdit.setError("REQUIRED !");
             return false;
         }
