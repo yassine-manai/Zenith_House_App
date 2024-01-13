@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:background="@color/white"
-        android:text="Delete Feedback"
+        android:text="Supprimer Feedback"
         android:layout_marginTop="16dp"/>
 
     <TextView

@@ -3,14 +3,20 @@ package dev.mobile.zenithhouseapp;
 public class feeds {
     private int id;
     private String name;
-    private String number;
+    private String phone;
     private String feed;
 
-    public feeds(int id, String name, String number, String feed) {
+    public feeds(int id, String name, String phone, String feed)
+    {
         this.id = id;
         this.name = name;
-        this.number = number;
+        this.phone = phone;
         this.feed = feed;
+    }
+
+    public feeds(int id)
+    {
+        this.id = id;
     }
 
     public int getId() {
@@ -29,12 +35,12 @@ public class feeds {
         this.name = name;
     }
 
-    public String getNumber() {
-        return number;
+    public String getphone() {
+        return phone;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setphone(String phone) {
+        this.phone = phone;
     }
 
     public String getFeed() {
@@ -50,7 +56,7 @@ public class feeds {
         return "feeds{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", number='" + number + '\'' +
+                ", phone='" + phone + '\'' +
                 ", feed='" + feed + '\'' +
                 '}';
     }

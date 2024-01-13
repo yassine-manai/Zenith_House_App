@@ -106,7 +106,7 @@ public class ListerFragment extends Fragment {
                                 }
                                 else
                                 {
-                                    Toast.makeText(getActivity(), "No feeds available", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
@@ -119,17 +119,17 @@ public class ListerFragment extends Fragment {
                 }
                 else
                 {
-                    Toast.makeText(getActivity(), "URL is empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "URL empty", Toast.LENGTH_SHORT).show();
                 }
             }
             else
             {
-                Toast.makeText(getActivity(), "Bundle is null", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Bundle null", Toast.LENGTH_SHORT).show();
             }
         }
         else
         {
-            Toast.makeText(getActivity(), "RecyclerView is null", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "RecyclerView null", Toast.LENGTH_SHORT).show();
         }
         return v;
     }

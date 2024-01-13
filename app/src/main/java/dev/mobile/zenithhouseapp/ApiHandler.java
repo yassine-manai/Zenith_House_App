@@ -14,7 +14,7 @@ public interface ApiHandler {
     Call<List<feeds>> getAllfeeds();
 
     @POST("ZHA/insert.php")
-    Call<feeds> insertfeeds(@Body FeedRequestBody requestBody);
+    Call<feeds> insertfeeds(@Body feeds requestBody);
 
     @POST("ZHA/insertuser.php")
     Call<Void> insertuser(@Body User user);
@@ -26,8 +26,8 @@ public interface ApiHandler {
     );
 
     @POST("ZHA/update.php")
-    Call<feeds> updatetfeeds(@Body FeedRequestBody requestBody);
+    Call<feeds> updatetfeeds(@Body feeds requestBody);
 
     @POST("ZHA/delete.php")
-    Call<Void> deletefeeds(@Body FeedIdRequestBody requestBody);
+    Call<Void> deletefeeds(@Body feeds requestBody);
 }

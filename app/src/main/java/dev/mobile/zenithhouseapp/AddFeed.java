@@ -99,6 +99,11 @@ public class AddFeed extends Fragment {
         if (TextUtils.isEmpty(idStr) || TextUtils.isEmpty(name) || TextUtils.isEmpty(number) || TextUtils.isEmpty(feed))
         {
             Toast.makeText(getActivity(), "Les Champs sont obligatoires . . .", Toast.LENGTH_SHORT).show();
+            idf.setError("Erreur");
+            nom_add.setError("Erreur");
+            phn_add.setError("Erreur");
+            suggest_add.setError("Erreur");
+
             return;
         }
 
@@ -113,7 +118,7 @@ public class AddFeed extends Fragment {
 
         ApiHandler api = retrofit.create(ApiHandler.class);
 
-        FeedRequestBody requestBody = new FeedRequestBody(id, name, number, feed);
+        feeds requestBody = new feeds(id, name, number, feed);
 
         Call<feeds> addfeed = api.insertfeeds(requestBody);
 
@@ -126,11 +131,11 @@ public class AddFeed extends Fragment {
                 {
                     if (response.body() != null)
                     {
-                        Toast.makeText(getActivity(), "Feeds added", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Avis Ajoutée", Toast.LENGTH_LONG).show();
                     }
                     else
                     {
-                        Toast.makeText(getActivity(), "Feed nt added", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Avis Non Ajoutée", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -139,7 +144,7 @@ public class AddFeed extends Fragment {
             @Override
             public void onFailure(Throwable t)
             {
-                Toast.makeText(getActivity(), "Failed: " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Erreur: " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 err.setText(t.getLocalizedMessage());
             }
         });

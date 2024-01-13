@@ -1,6 +1,7 @@
 package dev.mobile.zenithhouseapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -40,7 +41,6 @@ public class activity_Login extends AppCompatActivity
                 Bind.LShow.setVisibility(View.INVISIBLE);
                 Bind.LHide.setVisibility(View.VISIBLE);
                 Bind.PassLogEdit.setTransformationMethod(null);
-
             }
         });
 
@@ -52,10 +52,8 @@ public class activity_Login extends AppCompatActivity
                 Bind.LShow.setVisibility(View.VISIBLE);
                 Bind.LHide.setVisibility(View.INVISIBLE);
                 Bind.PassLogEdit.setTransformationMethod(new PasswordTransformationMethod());
-
             }
         });
-
 
         // Create Retrofit instance
         Retrofit retrofit = new Retrofit.Builder()
@@ -120,8 +118,7 @@ public class activity_Login extends AppCompatActivity
         call.enqueue(new Callback<List<User>>()
         {
             @Override
-            public void onResponse(Response<List<User>> response, Retrofit retrofit)
-            {
+            public void onResponse(Response<List<User>> response, Retrofit retrofit) {
                 if (response.isSuccess() && response.body() != null && response.body().size() > 0)
                 {
                     List<User> userList = response.body();
@@ -133,11 +130,8 @@ public class activity_Login extends AppCompatActivity
                         if (user.getEmail().equals(email) && user.getPassword().equals(password))
                         {
                             credentialsMatch = true;
+                            saveLoginStatus(true);  // Save login status in shared preferences
                             break;
-                        }
-                        else
-                        {
-                            credentialsMatch = false;
                         }
                     }
 
@@ -146,6 +140,7 @@ public class activity_Login extends AppCompatActivity
                         Toast.makeText(activity_Login.this, "Welcome User", Toast.LENGTH_LONG).show();
                         Intent start = new Intent(activity_Login.this, MainActivity.class);
                         startActivity(start);
+                        finish();  // Finish the login activity
                     }
                     else
                     {
@@ -167,5 +162,12 @@ public class activity_Login extends AppCompatActivity
         });
     }
 
-
+    // Save login status in shared preferences
+    private void saveLoginStatus(boolean isLoggedIn)
+    {
+        SharedPreferences preferences = getSharedPreferences("user_pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("isLoggedIn", isLoggedIn);
+        editor.apply();
+    }
 }

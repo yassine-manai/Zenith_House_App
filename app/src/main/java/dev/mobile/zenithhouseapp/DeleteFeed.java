@@ -88,7 +88,8 @@ public class DeleteFeed extends Fragment {
 
         if (id.isEmpty())
         {
-            Toast.makeText(getActivity(), "Please enter a Feed ID", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Entrer ID", Toast.LENGTH_SHORT).show();
+            edit.setError("Erreur");
             return;
         }
 
@@ -96,9 +97,9 @@ public class DeleteFeed extends Fragment {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create()).build();
 
         ApiHandler api = retrofit.create(ApiHandler.class);
-        FeedIdRequestBody requestBody = new FeedIdRequestBody(Integer.parseInt(id));
+        feeds request= new feeds(Integer.parseInt(id));
 
-        Call<Void> deleteUserCall = api.deletefeeds(requestBody);
+        Call<Void> deleteUserCall = api.deletefeeds(request);
 
         deleteUserCall.enqueue(new Callback<Void>()
         {
@@ -107,18 +108,18 @@ public class DeleteFeed extends Fragment {
             {
                 if (response.isSuccess())
                 {
-                    Toast.makeText(getActivity(), "Feed deleted", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Avis Supprimé", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
-                    Toast.makeText(getActivity(), "Delete failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Suppression échoué", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Throwable t)
             {
-                Toast.makeText(getActivity(), "Delete failed: " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 deleteError.setText(t.getLocalizedMessage());
             }
         });

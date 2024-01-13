@@ -1,5 +1,7 @@
 package dev.mobile.zenithhouseapp;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -13,18 +15,36 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity
 {
+
     BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        // Check login status from shared preferences
+        if (isLoggedIn()==false)
+        {
+            Intent loginIntent = new Intent(MainActivity.this, activity_Login.class);
+            startActivity(loginIntent);
+            finish();  // Finish the main activity if not logged in
+            return;
+        }
+
         setContentView(R.layout.activity_main);
 
         bottomNavigationView = findViewById(R.id.bt_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigListener);
 
         loadFragment(new Home());
+    }
+
+
+    private boolean isLoggedIn()
+    {
+        SharedPreferences preferences = getSharedPreferences("user_pref", MODE_PRIVATE);
+        return preferences.getBoolean("isLoggedIn", false);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigListener =
@@ -50,7 +70,6 @@ public class MainActivity extends AppCompatActivity
                         selectedFragment = new Garage();
                     }
 
-
                     if (selectedFragment != null)
                     {
                         Bundle bundle = new Bundle();
@@ -65,13 +84,12 @@ public class MainActivity extends AppCompatActivity
                 }
             };
 
-
-        private void loadFragment(Fragment fragment)
-        {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.addplaceholer, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
+    private void loadFragment(Fragment fragment)
+    {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.addplaceholer, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }

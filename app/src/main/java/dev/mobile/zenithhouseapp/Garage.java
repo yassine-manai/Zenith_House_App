@@ -153,14 +153,14 @@ public class Garage extends Fragment {
             // Switch is checked (ON)
             switchView.getThumbDrawable().setTint(getResources().getColor(R.color.primaryColor));
             switchView.getTrackDrawable().setTint(getResources().getColor(R.color.primaryColor));
-            switchView.setText("Garage Open");
+            switchView.setText("Garage Ouvert");
             switchImageView.setImageResource(R.drawable.go);
         }
         else
         {
             switchView.getThumbDrawable().setTint(getResources().getColor(R.color.white));
             switchView.getTrackDrawable().setTint(getResources().getColor(R.color.white));
-            switchView.setText("Garage Closed");
+            switchView.setText("Garage Fermé");
             switchImageView.setImageResource(R.drawable.gc);
         }
     }

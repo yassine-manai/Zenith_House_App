@@ -12,7 +12,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class feed extends AppCompatActivity {
+public class feed extends AppCompatActivity
+{
     private BottomNavigationView bottomNavigationView;
 
     @SuppressLint("MissingInflatedId")

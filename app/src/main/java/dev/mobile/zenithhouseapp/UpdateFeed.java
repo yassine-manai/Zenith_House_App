@@ -65,8 +65,8 @@ public class UpdateFeed extends Fragment {
 
         id = v.findViewById(R.id.et_user_id);
         name = v.findViewById(R.id.et_updated_name);
-        phone = v.findViewById(R.id.et_updated_username);
-        feed = v.findViewById(R.id.et_updated_email);
+        phone = v.findViewById(R.id.et_updated_phone);
+        feed = v.findViewById(R.id.et_updated_feed);
         btnUpdate = v.findViewById(R.id.btnUpdateUser);
         back = v.findViewById(R.id.back);
 
@@ -100,11 +100,11 @@ public class UpdateFeed extends Fragment {
 
         if (idf.isEmpty())
         {
-            Toast.makeText(getActivity(), "Please enter a Feed ID", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Entrer un ID", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        FeedRequestBody requestBody = new FeedRequestBody(Integer.parseInt(idf), namef, phonef, ffed);
+        feeds requestBody = new feeds(Integer.parseInt(idf), namef, phonef, ffed);
 
         String URL = getArguments().getString("url", "");
         Retrofit retrofit = new Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create()).build();
@@ -119,18 +119,18 @@ public class UpdateFeed extends Fragment {
             {
                 if (response.isSuccess())
                 {
-                    Toast.makeText(getActivity(), "Feed updated", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Feed Mis a Jour", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
-                    Toast.makeText(getActivity(), "Update failed: ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Erreur : ", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Throwable t)
             {
-                Toast.makeText(getActivity(), "Update failed: " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Erreur Modification: " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 updateError.setText(t.getLocalizedMessage());
             }
         });

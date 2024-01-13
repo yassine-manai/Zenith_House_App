@@ -43,7 +43,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.feedViewHolder
         feeds  fed = listefeed.get (position);
         holder.id.setText (String.valueOf(fed.getId()));
         holder.name.setText (fed.getName());
-        holder.phone.setText (fed.getNumber());
+        holder.phone.setText (fed.getphone());
         holder.feed.setText (fed.getFeed());
 
         holder.itemView.setOnClickListener(new View.OnClickListener()
