@@ -1,6 +1,5 @@
 package dev.mobile.zenithhouseapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,15 +68,7 @@ public class DeleteFeed extends Fragment {
         deleteError = v.findViewById(R.id.delete_error);
         //back = v.findViewById(R.id.back);
 
-        back.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                Intent home = new Intent(getActivity(), MainActivity.class);
-                startActivity(home);
-            }
-        });
+
 
         btnDeletefeed.setOnClickListener(new View.OnClickListener()
         {

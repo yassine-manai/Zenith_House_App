@@ -24,6 +24,9 @@
     <EditText
         android:id="@+id/et_delete"
         android:layout_width="250dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"
         android:layout_height="50dp" />
 
     <Button
