@@ -101,7 +101,7 @@
         tools:ignore="MissingConstraints" />
 
         <ImageView
-            android:id="@+id/Rshow"
+            android:id="@+id/Show"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="16dp"
@@ -113,7 +113,7 @@
             app:srcCompat="@drawable/eye" />
 
         <ImageView
-            android:id="@+id/Rhide"
+            android:id="@+id/Hide"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="16dp"
@@ -147,7 +147,7 @@
         tools:ignore="MissingConstraints" />
 
         <ImageView
-            android:id="@+id/Rshow2"
+            android:id="@+id/Show2"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="16dp"
@@ -159,7 +159,7 @@
             app:srcCompat="@drawable/eye" />
 
         <ImageView
-            android:id="@+id/Rhide2"
+            android:id="@+id/Hide2"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="16dp"

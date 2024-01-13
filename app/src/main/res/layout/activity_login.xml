@@ -62,20 +62,56 @@
             android:id="@+id/EmailEditLogin"
             android:hint="Enter your Email" />
 
-        <EditText
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:background="@drawable/input_bg"
-            android:textSize="14dp"
-            android:elevation="5dp"
-            android:fontFamily="@font/poppinsregular"
-            android:textColorHint="@color/black"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="10dp"
-            android:id="@+id/PassLogEdit"
-            android:inputType="textPassword"
-            android:hint="Enter your Password" />
+            android:layout_marginTop="15dp"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:background="@drawable/input_bg"
+                android:fontFamily="@font/poppinsregular"
+                android:textColorHint="@color/black"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:elevation="5dp"
+                android:inputType="textPassword"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:id="@+id/PassLogEdit"
+                android:hint="Enter your Password"
+                tools:ignore="MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/LShow"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:elevation="5dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/PassLogEdit"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/eye" />
+
+            <ImageView
+                android:id="@+id/LHide"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:elevation="5dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/PassLogEdit"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/hidden" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </LinearLayout>
 

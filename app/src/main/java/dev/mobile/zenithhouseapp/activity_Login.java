@@ -2,6 +2,7 @@ package dev.mobile.zenithhouseapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -28,6 +29,31 @@ public class activity_Login extends AppCompatActivity {
         Bind = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = Bind.getRoot();
         setContentView(view);
+
+        Bind.LShow.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Bind.LShow.setVisibility(View.INVISIBLE);
+                Bind.LHide.setVisibility(View.VISIBLE);
+                Bind.PassLogEdit.setTransformationMethod(null);
+
+            }
+        });
+
+        Bind.LHide.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Bind.LShow.setVisibility(View.VISIBLE);
+                Bind.LHide.setVisibility(View.INVISIBLE);
+                Bind.PassLogEdit.setTransformationMethod(new PasswordTransformationMethod());
+
+            }
+        });
+
 
         // Create Retrofit instance
         Retrofit retrofit = new Retrofit.Builder()

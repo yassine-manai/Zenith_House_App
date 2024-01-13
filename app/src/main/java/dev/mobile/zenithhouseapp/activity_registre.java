@@ -2,6 +2,7 @@ package dev.mobile.zenithhouseapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -11,14 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import dev.mobile.zenithhouseapp.databinding.ActivityRegistreBinding;
 import retrofit.Call;
 import retrofit.Callback;
+import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
-import retrofit.GsonConverterFactory;
 
 public class activity_registre extends AppCompatActivity {
 
     ActivityRegistreBinding Binding;
     ApiHandler apiService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,54 @@ public class activity_registre extends AppCompatActivity {
         Binding = ActivityRegistreBinding.inflate(getLayoutInflater());
         View view = Binding.getRoot();
         setContentView(view);
+
+        Binding.Show.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Binding.Show.setVisibility(View.INVISIBLE);
+                Binding.Hide.setVisibility(View.VISIBLE);
+                Binding.PassRegEdit.setTransformationMethod(null);
+
+            }
+        });
+
+        Binding.Hide.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Binding.Show.setVisibility(View.VISIBLE);
+                Binding.Hide.setVisibility(View.INVISIBLE);
+                Binding.PassRegEdit.setTransformationMethod(new PasswordTransformationMethod());
+
+            }
+        });
+
+        Binding.Show2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Binding.Show2.setVisibility(View.INVISIBLE);
+                Binding.Hide2.setVisibility(View.VISIBLE);
+                Binding.PassConfRegEdit.setTransformationMethod(null);
+
+            }
+        });
+
+        Binding.Hide2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Binding.Show2.setVisibility(View.VISIBLE);
+                Binding.Hide2.setVisibility(View.INVISIBLE);
+                Binding.PassConfRegEdit.setTransformationMethod(new PasswordTransformationMethod());
+
+            }
+        });
 
         // Create Retrofit instance
         Retrofit retrofit = new Retrofit.Builder()
@@ -63,7 +113,8 @@ public class activity_registre extends AppCompatActivity {
         }
     }
 
-    private boolean validateInput() {
+    private boolean validateInput()
+    {
         if (Binding.NameRegEdit.getText().toString().isEmpty()) {
             Binding.NameRegEdit.setError("REQUIRED !");
             return false;
