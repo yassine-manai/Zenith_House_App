@@ -84,16 +84,16 @@ public class activity_Login extends AppCompatActivity
 
     private void handleLogin()
     {
-        if (validateInput())
+        if (valide())
         {
-            loginUserFromServer(
+            loginUser(
                     Bind.EmailEditLogin.getText().toString(),
                     Bind.PassLogEdit.getText().toString()
             );
         }
     }
 
-    private boolean validateInput()
+    private boolean valide()
     {
         if (Bind.EmailEditLogin.getText().toString().isEmpty())
         {
@@ -110,44 +110,43 @@ public class activity_Login extends AppCompatActivity
         return true;
     }
 
-    private void loginUserFromServer(String email, String password)
+    private void loginUser(String email, String password)
     {
         Call<List<User>> call = apiService.loginUser(email, password);
+
         call.enqueue(new Callback<List<User>>()
         {
             @Override
-            public void onResponse(Response<List<User>> response, Retrofit retrofit) {
-                if (response.isSuccess() && response.body() != null && response.body().size() > 0)
+            public void onResponse(Response<List<User>> response, Retrofit retrofit)
+            {
+                if (response.isSuccess() && response.body() != null)
                 {
                     List<User> userList = response.body();
 
-                    boolean credentialsMatch = false;
-
-                    for (User user : userList)
+                    if (!userList.isEmpty())
                     {
-                        if (user.getEmail().equals(email) && user.getPassword().equals(password))
+                        for (User user : userList)
                         {
-                            credentialsMatch = true;
-                            saveLoginStatus(true);
-                            break;
+                            if (user.getEmail().equals(email) && user.getPassword().equals(password))
+                            {
+                                saveLoginStatus(true);
+                                Toast.makeText(activity_Login.this, "W E L C O M E", Toast.LENGTH_LONG).show();
+                                Intent start = new Intent(activity_Login.this, MainActivity.class);
+                                startActivity(start);
+                                finish();
+                                return;
+                            }
                         }
-                    }
-
-                    if (credentialsMatch)
-                    {
-                        Toast.makeText(activity_Login.this, "Welcome User", Toast.LENGTH_LONG).show();
-                        Intent start = new Intent(activity_Login.this, MainActivity.class);
-                        startActivity(start);
-                        finish();
+                        Toast.makeText(activity_Login.this, "Incorrect email or password", Toast.LENGTH_LONG).show();
                     }
                     else
                     {
-                        Toast.makeText(activity_Login.this, "Incorrect email or password", Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity_Login.this, "User Not Found", Toast.LENGTH_LONG).show();
                     }
                 }
                 else
                 {
-                    Toast.makeText(activity_Login.this, "User Not Found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity_Login.this, "Failed to fetch user data", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -158,13 +157,14 @@ public class activity_Login extends AppCompatActivity
                 Log.e("Retrofit", "Failed to execute API request", t);
             }
         });
+
     }
 
-    private void saveLoginStatus(boolean isLoggedIn)
+    private void saveLoginStatus(boolean log)
     {
         SharedPreferences preferences = getSharedPreferences("user_pref", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("isLoggedIn", isLoggedIn);
+        editor.putBoolean("isLoggedIn", log);
         editor.apply();
     }
 }

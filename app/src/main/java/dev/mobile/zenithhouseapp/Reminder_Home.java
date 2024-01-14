@@ -1,10 +1,10 @@
 package dev.mobile.zenithhouseapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import dev.mobile.zenithhouseapp.databinding.ActivityReminderHomeBinding;
 
@@ -25,6 +25,9 @@ public class Reminder_Home extends AppCompatActivity implements View.OnClickList
         binding.btnFragAjout.setOnClickListener(this);
         binding.btnFragLister.setOnClickListener(this);
         binding.btnFragModif.setOnClickListener(this);
+
+        loadFragment(new Ajout());
+
     }
 
     @Override

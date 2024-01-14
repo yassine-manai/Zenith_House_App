@@ -21,4 +21,10 @@
         android:icon="@drawable/map"
         android:title="Maps" />
 
+
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/logout"
+        android:title="Logout" />
+
 </menu>

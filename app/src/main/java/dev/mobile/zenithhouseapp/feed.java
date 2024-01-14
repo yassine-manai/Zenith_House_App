@@ -26,7 +26,6 @@ public class feed extends AppCompatActivity
         bottomNavigationView = findViewById(R.id.btnavretro);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigListener);
 
-        // Load the default fragment
         loadFragment(new AddFeed());
     }
 

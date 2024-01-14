@@ -1,16 +1,16 @@
 package dev.mobile.zenithhouseapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity
@@ -23,12 +23,11 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
 
-        // Check login status from shared preferences
-        if (isLoggedIn()==false)
+        if (!isLoggedIn())
         {
             Intent loginIntent = new Intent(MainActivity.this, activity_Login.class);
             startActivity(loginIntent);
-            finish();  // Finish the main activity if not logged in
+            finish();
             return;
         }
 
@@ -40,9 +39,7 @@ public class MainActivity extends AppCompatActivity
         loadFragment(new Home());
     }
 
-
-    private boolean isLoggedIn()
-    {
+    private boolean isLoggedIn() {
         SharedPreferences preferences = getSharedPreferences("user_pref", MODE_PRIVATE);
         return preferences.getBoolean("isLoggedIn", false);
     }
@@ -51,8 +48,7 @@ public class MainActivity extends AppCompatActivity
             new BottomNavigationView.OnNavigationItemSelectedListener()
             {
                 @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item)
-                {
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragment = null;
 
                     if (item.getItemId() == R.id.home)
@@ -75,12 +71,14 @@ public class MainActivity extends AppCompatActivity
                         selectedFragment = new Maps();
                     }
 
+                    if (item.getItemId() == R.id.logout)
+                    {
+                        dialogdeconnect();
+                        return true;
+                    }
+
                     if (selectedFragment != null)
                     {
-                        Bundle bundle = new Bundle();
-                        selectedFragment.setArguments(bundle);
-
-                        // Load the selected fragment
                         loadFragment(selectedFragment);
                         return true;
                     }
@@ -89,10 +87,47 @@ public class MainActivity extends AppCompatActivity
                 }
             };
 
+    private void dialogdeconnect()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.drawable.logoapp);
+        builder.setTitle("Se Déconnecter ? ")
+                .setPositiveButton("Décoonecter", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        logout();
+                    }
+                })
+                .setNegativeButton("Annuler ", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    private void logout()
+    {
+        SharedPreferences preferences = getSharedPreferences("user_pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+
+        Intent loginIntent = new Intent(MainActivity.this, activity_Login.class);
+        startActivity(loginIntent);
+        finish();
+    }
+
     private void loadFragment(Fragment fragment)
     {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+
         transaction.replace(R.id.addplaceholer, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
