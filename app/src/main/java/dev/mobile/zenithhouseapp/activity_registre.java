@@ -16,14 +16,16 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class activity_registre extends AppCompatActivity {
+public class activity_registre extends AppCompatActivity
+{
 
     ActivityRegistreBinding Binding;
     ApiHandler apiService;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         Binding = ActivityRegistreBinding.inflate(getLayoutInflater());
@@ -80,31 +82,36 @@ public class activity_registre extends AppCompatActivity {
 
         // Create Retrofit instance
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://d98b-196-176-164-36.ngrok-free.app")
+                .baseUrl("https://liger-divine-surely.ngrok-free.app")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         // Create ApiService instance
         apiService = retrofit.create(ApiHandler.class);
 
-        Binding.btnRegister.setOnClickListener(new View.OnClickListener() {
+        Binding.btnRegister.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 handleRegistration();
             }
         });
 
-        Binding.logRegBtn.setOnClickListener(new View.OnClickListener() {
+        Binding.logRegBtn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent start = new Intent(activity_registre.this, activity_Login.class);
                 startActivity(start);
             }
         });
     }
 
-    private void handleRegistration() {
-        if (validateInput()) {
+    private void handleRegistration()
+    {
+        if (validateInput())
+        {
             saveUserToServer(new User(
                     Binding.NameRegEdit.getText().toString(),
                     Binding.EmailRegEdit.getText().toString(),
@@ -115,27 +122,32 @@ public class activity_registre extends AppCompatActivity {
 
     private boolean validateInput()
     {
-        if (Binding.NameRegEdit.getText().toString().isEmpty()) {
+        if (Binding.NameRegEdit.getText().toString().isEmpty())
+        {
             Binding.NameRegEdit.setError("REQUIRED !");
             return false;
         }
 
-        if (Binding.EmailRegEdit.getText().toString().isEmpty()) {
+        if (Binding.EmailRegEdit.getText().toString().isEmpty())
+        {
             Binding.EmailRegEdit.setError("REQUIRED !");
             return false;
         }
 
-        if (Binding.PassRegEdit.getText().toString().isEmpty()) {
+        if (Binding.PassRegEdit.getText().toString().isEmpty())
+        {
             Binding.PassRegEdit.setError("REQUIRED !");
             return false;
         }
 
-        if (Binding.PassConfRegEdit.getText().toString().isEmpty()) {
+        if (Binding.PassConfRegEdit.getText().toString().isEmpty())
+        {
             Binding.PassConfRegEdit.setError("REQUIRED !");
             return false;
         }
 
-        if (!Binding.PassRegEdit.getText().toString().equals(Binding.PassConfRegEdit.getText().toString())) {
+        if (!Binding.PassRegEdit.getText().toString().equals(Binding.PassConfRegEdit.getText().toString()))
+        {
             Binding.PassRegEdit.setError("Password doesn't match!");
             Binding.PassConfRegEdit.setError("Password doesn't match!");
             return false;
@@ -144,22 +156,29 @@ public class activity_registre extends AppCompatActivity {
         return true;
     }
 
-    private void saveUserToServer(User user) {
+    private void saveUserToServer(User user)
+    {
         Call<Void> call = apiService.insertuser(user);
-        call.enqueue(new Callback<Void>() {
+        call.enqueue(new Callback<Void>()
+        {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
-                if (response.isSuccess()) {
+            public void onResponse(Response<Void> response, Retrofit retrofit)
+            {
+                if (response.isSuccess())
+                {
                     Toast.makeText(activity_registre.this, "Successfully added", Toast.LENGTH_SHORT).show();
                     Intent nextAct = new Intent(activity_registre.this, activity_Login.class);
                     startActivity(nextAct);
-                } else {
+                }
+                else
+                {
                     Log.d("Error", "Failed to add user. Response code: " + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Throwable t) {
+            public void onFailure(Throwable t)
+            {
                 Log.d("Error", "Failed to add user. " + t.getMessage());
             }
         });

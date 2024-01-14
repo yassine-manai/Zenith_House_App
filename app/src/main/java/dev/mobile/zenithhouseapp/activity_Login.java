@@ -55,13 +55,11 @@ public class activity_Login extends AppCompatActivity
             }
         });
 
-        // Create Retrofit instance
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://d98b-196-176-164-36.ngrok-free.app")
+                .baseUrl("https://liger-divine-surely.ngrok-free.app/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        // Create ApiService instance
         apiService = retrofit.create(ApiHandler.class);
 
         Bind.btnRegister.setOnClickListener(new View.OnClickListener()
@@ -130,7 +128,7 @@ public class activity_Login extends AppCompatActivity
                         if (user.getEmail().equals(email) && user.getPassword().equals(password))
                         {
                             credentialsMatch = true;
-                            saveLoginStatus(true);  // Save login status in shared preferences
+                            saveLoginStatus(true);
                             break;
                         }
                     }
@@ -140,7 +138,7 @@ public class activity_Login extends AppCompatActivity
                         Toast.makeText(activity_Login.this, "Welcome User", Toast.LENGTH_LONG).show();
                         Intent start = new Intent(activity_Login.this, MainActivity.class);
                         startActivity(start);
-                        finish();  // Finish the login activity
+                        finish();
                     }
                     else
                     {
@@ -162,7 +160,6 @@ public class activity_Login extends AppCompatActivity
         });
     }
 
-    // Save login status in shared preferences
     private void saveLoginStatus(boolean isLoggedIn)
     {
         SharedPreferences preferences = getSharedPreferences("user_pref", MODE_PRIVATE);

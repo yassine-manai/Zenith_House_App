@@ -36,7 +36,8 @@ public class AddFeed extends Fragment {
     public AddFeed() {
     }
 
-    public static AddFeed newInstance(String param1, String param2) {
+    public static AddFeed newInstance(String param1, String param2)
+    {
         AddFeed fragment = new AddFeed();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -46,7 +47,8 @@ public class AddFeed extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);

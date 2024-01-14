@@ -62,7 +62,7 @@ public class feed extends AppCompatActivity
                     if (selectedFragment != null)
                     {
                         Bundle bundle = new Bundle();
-                        bundle.putString("url", "https://d98b-196-176-164-36.ngrok-free.app/ZHA:80");
+                        bundle.putString("url", "https://liger-divine-surely.ngrok-free.app/ZHA:80");
                         selectedFragment.setArguments(bundle);
 
                         loadFragment(selectedFragment);
@@ -81,7 +81,7 @@ public class feed extends AppCompatActivity
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         Bundle bundle = new Bundle();
-        bundle.putString("url", "https://d98b-196-176-164-36.ngrok-free.app/ZHA:80");
+        bundle.putString("url", "https://liger-divine-surely.ngrok-free.app/ZHA:80");
         fragment.setArguments(bundle);
 
         transaction.replace(R.id.navretroadd, fragment);

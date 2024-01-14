@@ -16,4 +16,9 @@
         android:icon="@drawable/garage"
         android:title="Garage" />
 
+    <item
+        android:id="@+id/maps"
+        android:icon="@drawable/map"
+        android:title="Maps" />
+
 </menu>

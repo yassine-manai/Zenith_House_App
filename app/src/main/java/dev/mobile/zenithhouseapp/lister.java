@@ -1,14 +1,13 @@
 package dev.mobile.zenithhouseapp;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.List;
 
@@ -55,7 +54,8 @@ public class lister extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -71,7 +71,7 @@ public class lister extends Fragment {
 
         layoutManager = new LinearLayoutManager(getActivity());
         noteBDD db = new noteBDD(getActivity());
-        noteList = db.getAllnotes(); // Retrieve the contact list from the database
+        noteList = db.getAllnotes();
 
         nAdapter = new noteAdapter(getActivity(), noteList);
 

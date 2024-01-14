@@ -1,6 +1,7 @@
 package dev.mobile.zenithhouseapp;
 
-public class feeds {
+public class feeds
+{
     private int id;
     private String name;
     private String phone;

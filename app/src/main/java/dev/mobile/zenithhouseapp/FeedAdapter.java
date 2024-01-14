@@ -58,7 +58,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.feedViewHolder
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return this.listefeed.size();
     }
 

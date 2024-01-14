@@ -66,7 +66,6 @@ public class DeleteFeed extends Fragment {
         edit = (EditText) v.findViewById(R.id.et_delete);
         btnDeletefeed = v.findViewById(R.id.btnDeleteUser);
         deleteError = v.findViewById(R.id.delete_error);
-        //back = v.findViewById(R.id.back);
 
 
 
@@ -94,7 +93,10 @@ public class DeleteFeed extends Fragment {
         }
 
         String URL = getArguments().getString("url", "");
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit
+                .Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create()).build();
 
         ApiHandler api = retrofit.create(ApiHandler.class);
         feeds request= new feeds(Integer.parseInt(id));

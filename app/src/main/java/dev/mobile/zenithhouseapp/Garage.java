@@ -25,7 +25,8 @@ import dev.mobile.zenithhouseapp.databinding.FragmentGarageBinding;
  * Use the {@link Garage#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Garage extends Fragment {
+public class Garage extends Fragment
+{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,7 +42,8 @@ public class Garage extends Fragment {
     private DatabaseReference mStatusReference;
     private static final String TAG = "Garage";
 
-    public Garage() {
+    public Garage()
+    {
         // Required empty public constructor
     }
 
@@ -54,7 +56,8 @@ public class Garage extends Fragment {
      * @return A new instance of fragment Garage.
      */
     // TODO: Rename and change types and number of parameters
-    public static Garage newInstance(String param1, String param2) {
+    public static Garage newInstance(String param1, String param2)
+    {
         Garage fragment = new Garage();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -64,7 +67,8 @@ public class Garage extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -150,7 +154,6 @@ public class Garage extends Fragment {
     {
         if (isChecked)
         {
-            // Switch is checked (ON)
             switchView.getThumbDrawable().setTint(getResources().getColor(R.color.primaryColor));
             switchView.getTrackDrawable().setTint(getResources().getColor(R.color.primaryColor));
             switchView.setText("Garage Ouvert");

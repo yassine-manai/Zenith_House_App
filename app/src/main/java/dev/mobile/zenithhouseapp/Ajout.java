@@ -17,7 +17,8 @@ import androidx.fragment.app.Fragment;
  * Use the {@link Ajout#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Ajout extends Fragment {
+public class Ajout extends Fragment
+{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,7 +46,8 @@ public class Ajout extends Fragment {
      * @return A new instance of fragment ajout.
      */
     // TODO: Rename and change types and number of parameters
-    public static Ajout newInstance(String param1, String param2) {
+    public static Ajout newInstance(String param1, String param2)
+    {
         Ajout fragment = new Ajout();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -55,7 +57,8 @@ public class Ajout extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);

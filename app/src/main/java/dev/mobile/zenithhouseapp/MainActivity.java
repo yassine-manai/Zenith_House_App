@@ -70,6 +70,11 @@ public class MainActivity extends AppCompatActivity
                         selectedFragment = new Garage();
                     }
 
+                    if (item.getItemId() == R.id.maps)
+                    {
+                        selectedFragment = new Maps();
+                    }
+
                     if (selectedFragment != null)
                     {
                         Bundle bundle = new Bundle();

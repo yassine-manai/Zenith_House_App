@@ -107,7 +107,10 @@ public class UpdateFeed extends Fragment {
         feeds requestBody = new feeds(Integer.parseInt(idf), namef, phonef, ffed);
 
         String URL = getArguments().getString("url", "");
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit
+                .Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create()).build();
 
         ApiHandler api = retrofit.create(ApiHandler.class);
         Call<feeds> updateUserCall = api.updatetfeeds(requestBody);
