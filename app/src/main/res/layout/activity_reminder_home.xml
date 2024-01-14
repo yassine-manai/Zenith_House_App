@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
+            android:background="@drawable/input"
             android:textColor="@color/white"
             android:text="Ajouter Notes" />
 
@@ -32,6 +33,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_fragModif"
             android:layout_weight="1"
+            android:background="@drawable/input"
             android:layout_margin="10dp"
             android:textColor="@color/white"
             android:text="Modifier Notes"
@@ -42,6 +44,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_fragLister"
             android:layout_weight="1"
+            android:background="@drawable/input"
             android:layout_marginTop="10dp"
             android:text="Lister    Notes"
             android:textColor="@color/white"
