@@ -1,11 +1,14 @@
 package dev.mobile.zenithhouseapp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +27,8 @@ public class activity_Login extends AppCompatActivity
 
     private ActivityLoginBinding Bind;
     private ApiHandler apiService;
+    private AlertDialog progressDialog;
+    private TextView dialogText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -67,7 +72,7 @@ public class activity_Login extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                handleLogin();
+                Login();
             }
         });
 
@@ -82,18 +87,26 @@ public class activity_Login extends AppCompatActivity
         });
     }
 
-    private void handleLogin()
+    private void Login()
     {
-        if (valide())
+        if (validate())
         {
-            loginUser(
-                    Bind.EmailEditLogin.getText().toString(),
-                    Bind.PassLogEdit.getText().toString()
-            );
+            showProgressDialog();
+            new Handler().postDelayed(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    loginUser(
+                            Bind.EmailEditLogin.getText().toString(),
+                            Bind.PassLogEdit.getText().toString()
+                    );
+                }
+            }, 1000);
         }
     }
 
-    private boolean valide()
+    private boolean validate()
     {
         if (Bind.EmailEditLogin.getText().toString().isEmpty())
         {
@@ -119,18 +132,23 @@ public class activity_Login extends AppCompatActivity
             @Override
             public void onResponse(Response<List<User>> response, Retrofit retrofit)
             {
+                dismissProgressDialog();
                 if (response.isSuccess() && response.body() != null)
                 {
                     List<User> userList = response.body();
 
                     if (!userList.isEmpty())
                     {
-                        for (User user : userList)
+                        int userListSize = userList.size();
+
+                        for (int i = 0; i < userListSize; i++)
                         {
+                            User user = userList.get(i);
                             if (user.getEmail().equals(email) && user.getPassword().equals(password))
                             {
                                 saveLoginStatus(true);
                                 Toast.makeText(activity_Login.this, "W E L C O M E", Toast.LENGTH_LONG).show();
+
                                 Intent start = new Intent(activity_Login.this, MainActivity.class);
                                 startActivity(start);
                                 finish();
@@ -153,11 +171,10 @@ public class activity_Login extends AppCompatActivity
             @Override
             public void onFailure(Throwable t)
             {
+                dismissProgressDialog();
                 Toast.makeText(activity_Login.this, "Failed to login. " + t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.e("Retrofit", "Failed to execute API request", t);
             }
         });
-
     }
 
     private void saveLoginStatus(boolean log)
@@ -166,5 +183,28 @@ public class activity_Login extends AppCompatActivity
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean("isLoggedIn", log);
         editor.apply();
+    }
+
+
+
+    private void showProgressDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        View view = LayoutInflater.from(this).inflate(R.layout.progress_dialog, null);
+        dialogText = view.findViewById(R.id.dialogText);
+        builder.setView(view);
+        progressDialog = builder.create();
+        progressDialog.show();
+
+        dialogText.setText("Connexion en cours ...");
+    }
+
+    private void dismissProgressDialog()
+    {
+        if (progressDialog != null && progressDialog.isShowing())
+        {
+            progressDialog.dismiss();
+        }
     }
 }

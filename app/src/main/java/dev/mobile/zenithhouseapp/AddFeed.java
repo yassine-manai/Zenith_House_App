@@ -131,14 +131,11 @@ public class AddFeed extends Fragment {
             {
                 if (response.isSuccess())
                 {
-                    if (response.body() != null)
+                    if (response.body() == null)
                     {
                         Toast.makeText(getActivity(), "Avis Ajoutée", Toast.LENGTH_LONG).show();
                     }
-                    else
-                    {
-                        Toast.makeText(getActivity(), "Avis Non Ajoutée", Toast.LENGTH_LONG).show();
-                    }
+
                 }
             }
 
